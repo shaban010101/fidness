@@ -1,0 +1,18 @@
+<section id="porfolio" class="darkgrey_section last_content_section">
+  <div class="container sessions">
+    <h1 class="sessions">Purchase sessions</h1>
+    <ul class="sessions">
+      <li class="sessions"><p>Book a taster session with the with a coach for a discounted price of <%=  number_to_currency(((@trainer.profile.try(:price)/ 2)), unit: '£', precision: 2) %></p>
+      <button type="button" class="btn btn-info btn-lg">Purchase a taster session</button></li>
+        <p><b>Purchase a session/session plan which gives you a set number of sessions for a month and renew every month unless you cancel them, you can roll over any left over sessions into the new month if you don't use all of them up</b></p>
+        <li class="sessions"><p><b>Purchase a 1 hour session with the trainer for <%= one_session_price(@trainer) %></b/></p>
+        <button type="button" class="btn btn-info btn-lg">Purchase 1 session for  <%= one_session_price(@trainer) %></button></li>
+      <li class="sessions"><p><b>Purchase a 5 sessions lasting 1 hour each with the trainer for a total cost of <%= five_session_price(@trainer)%></b></p>
+      <button type="button" class="btn btn-info btn-lg">Purchase 5 sessions - <%= per_session_cost(@trainer, 5, discount_percentage: 0.92)%>/per session</button></li>
+      <li class="sessions"><p><b>Purchase 10 sessions lasting 1 hour each with the trainer for a total cost of <%= ten_session_price(@trainer)%></b/></p>
+      <button type="button" class="btn btn-info btn-lg">Purchase 10 sessions - <%= per_session_cost(@trainer, 10, discount_percentage: 0.84)%>/per session</button></li>
+      <li class="sessions"><p><b>Purchase 15 sessions lasting 1 hour each with the trainer for a total cost of <%= fifthteen_session_price(@trainer) %></b></p>
+      <button type="button" class="btn btn-info btn-lg">Purchase 15 sessions - <%= per_session_cost(@trainer, 15, discount_percentage: 0.76)%>/per session</button></li>
+    </ul>  
+  </div>
+</section>

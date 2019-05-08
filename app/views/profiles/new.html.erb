@@ -1,0 +1,38 @@
+<section class="darkgrey_section">
+  <div class="container profile">
+   <div class="col-sm-5 text-center">
+     <h2>Profile</h2>
+     <%= form_tag(profile_path, method: :post, multipart: true) do %>
+       <div class="form-group">
+         <%= text_field_tag(:first_name, nil, placeholder: 'Enter your First name', class: "form-control") %>
+	 <%= text_field_tag(:last_name, nil, placeholder: 'Enter your Last name', class: "form-control") %>
+         <% if current_user.trainer? %>
+           <span class="input-group-text" id="inputGroupFileAddon01">
+             <%= file_field_tag :avatar, accept: 'image/png,image/gif,image/jpeg' %>
+           </span>
+	   <%= text_field_tag("profile[price]", nil, placeholder: 'Enter the amount you would like to charge per session', class: "form-control") %>
+           <p>Short descripton</p> 
+           <%= text_area_tag("profile[short_description]", nil, class: "form-control") %>      <p>Long description</p>
+           <%= text_area_tag("profile[long_description]", nil, class: "form-control") %>       <p>Qualifications</p>
+           <%= text_area_tag("profile[qualifications]", nil, class: "form-control") %> 
+         <% end %>
+         <% @questions.each do |question| %>
+            <p><%= question.question %></p>
+              <% if question.options.empty? %>
+                <%= text_area_tag("answers[][answer]", nil, class: "form-control") %>
+                <%= hidden_field_tag("answers[][question_id]", question.id) %>
+                <%= hidden_field_tag("answers[][user_id]", current_user.id) %>
+              <% else %>
+                <%= select_tag("answers[][answer]", options_for_select(question.options), class: "form-control form-control-sm") %>
+                <%= hidden_field_tag("answers[][question_id]", question.id) %>
+                <%= hidden_field_tag("answers[][user_id]",  current_user.id) %>
+              <% end %>
+          <% end %>
+       </div> 
+       <div class="actions">
+         <%= submit_tag "Submit", class: "theme_btn" %>
+       </div>
+     <% end %>
+   </div>
+  </div>
+</section>

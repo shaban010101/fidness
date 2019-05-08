@@ -1,0 +1,19 @@
+.container.sessions {
+  display: flex;
+  justify-content: center;
+}
+
+.h1.sessions {
+  position: relative;
+  top: -20px;
+}
+
+.col-sm-8.sessions {
+  margin-top: 15px;
+}
+
+.btn-default.sessions {
+  position: absolute;
+  left: 34px;
+  bottom: 20px;
+}

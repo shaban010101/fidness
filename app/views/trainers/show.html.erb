@@ -1,0 +1,99 @@
+<section id="abovecontent" class="dark_section bg_image">
+    <div class="container"><div class="row">
+        <div class="block col-sm-12">
+            <ul class="breadcrumb">
+                <li><a href="./" class="pathway"><i class="rt-icon-home"></i></a></li>
+                <li><span><a href="./trainers.html">Trainers</a></span></li>
+                <li><span>Single Trainer</span></li>
+            </ul>
+        </div>
+    </div></div>
+</section>
+
+<section class="darkgrey_section">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 text-center">
+        <h2 class="block-header"><strong>Trainer</strong> Page</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="classes media light_section">
+          <a href="#" class="pull-left">
+            <%= image_tag('example/trainer-vertical2.jpg', alt: "image01", class: "media-object") %>
+          </a>
+
+          <div class="media-body">
+            <h3><a href="class-single.html"><%= (@trainer.first_name + @trainer.last_name) %></a></h3>
+            <div class="classes-description">
+              <p>Stet clita kasd gubergren, no sea takimata sanctus est lorem ipsum dolor sit amet.</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, voluptates, nemo, quaerat culpa sunt
+                quibusdam vitae doloremque molestias voluptatum id mollitia quas aliquid eum eius reiciendis aut illo
+                repellendus
+                ipsa.</p> <!-- Button trigger modal -->
+              <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                Purchase sessions
+              </button>
+
+              <!-- Modal -->
+              <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                      <h2 class="modal-title" id="myModalLabel">Purchase sessions</h2>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-horizontal">
+                          <%= form_tag(trainer_sessions_path(@trainer.id), method: :post) do %>                 <div class="col-sm-8 sessions">
+                              <%= select_options_html(@trainer) %>
+                            </div>
+                            <div class="col-sm-8 sessions">
+                              <%= text_field_tag('address_line_1', nil, placeholder: 'House number and Street Name', class: "form-control") %>
+                            </div>
+                            <div class="col-sm-8 sessions">
+                              <%= text_field_tag('city', nil, placeholder: 'City',  class: "form-control") %>
+                            </div>
+                            <div class="col-sm-8 sessions">
+                               <%= text_field_tag('post_code', nil, placeholder: 'Post code', class: "form-control") %>
+                            </div>
+                            <div class="col-sm-8 sessions">
+                              <%= text_field_tag('card_number', nil, placeholder: "Card number", class: "form-control") %>
+                            </div>
+                            <div class="col-sm-8 sessions">
+                              <%= text_field_tag('cvv', nil, placeholder: 'Card CVC code', class: "form-control") %>
+                            </div>
+                            <div class="col-sm-8 sessions">
+                              <%= month_field_tag('expiry_month_year', nil, min: 1, max: 12, step: 1, class: "form-control") %>
+                            </div>
+                            <div class="col-sm-8 sessions">
+                              <p class="total-price"></p>
+                            </div>
+                            <button type="submit" class="btn btn-default sessions">Purchase</button>
+                        <% end %>
+                      </div>
+                    <div class="modal-footer">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="copyright" class="light_section">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-sm-12 text-center">
+        Copyright - Fidness
+      </div>
+    </div>
+  </div>
+</section>

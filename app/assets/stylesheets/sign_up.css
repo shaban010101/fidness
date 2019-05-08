@@ -1,0 +1,9 @@
+.container.sign-up {
+  display: flex;
+  justify-content: center;
+}
+
+h1.sign-up {
+  position: relative;
+  top: -34px;
+}

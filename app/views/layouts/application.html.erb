@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<html>
+  <head>
+     <meta charset="utf-8">   
+     <title>Fidness</title>
+     <meta name="description" content="">
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <!-- <script src="app/assets/javascripts/vendor/modernizr-2.6.2.min.js"></script> -->
+    <!--[if lt IE 9]>
+      <script src="js/vendor/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+    <header id="header">
+            <div class="container"><div class="row">
+
+                <%= link_to('Fidness', root_path, class: "navbar-brand") %>
+
+                <div class="col-sm-12 mainmenu_wrap"><div class="main-menu-icon visible-xs"><span></span><span></span><span></span></div>
+                <ul id="mainmenu" class="menu sf-menu responsive-menu superfish">
+                    <li class="active">
+                        <%= link_to('Home', root_path) %>
+                    </li>
+                    <li class="dropdown">
+                        <%= link_to('Trainers', trainers_path) %>
+                    </li>
+                    <li class="dropdown">
+                      <% if user_signed_in? %>
+                        <%= link_to('Sign Out', :destroy_user_session, method: :delete) %>
+                      <% else %>
+                        <%= link_to('Sign In', :new_user_session) %>
+                      <% end %>
+                    </li>                                        
+                </ul>
+            </div>
+
+        </div></div>
+    </header>
+    <%= yield %>
+  </body>
+</html>

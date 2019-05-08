@@ -1,0 +1,26 @@
+<section id="portfolio" class="darkgrey_section last_content_section">
+  <div class="container">
+    <h2>Trainers</h2>
+      <div id="portfolio_wrapper" class="row">
+      <ul class="trainers row filtrable clearfix isotope" id="portfolioContainer">
+        <% @trainers.reverse.each_with_index do |trainer, index| %>
+          <% if index == 0 %>
+            <li class="item col-sm-6 isotope-item graphicdesign webdesign">
+          <% else %>
+            <li class="item col-sm-6 isotope-item photography webdesign">
+          <% end %>
+            <div class="media dark_section">
+              <%= link_to(trainer_path(trainer.id), class: "pull-left") do %>
+                <%#= image_tag(trainer&.avatar&.variant(resize: '270x200'), alt: "image01", class: "media-object") %>
+              <% end %>
+              <div class="media-body">
+                <h3><%= trainer.first_name %></h3>
+                <p><%= trainer.profile.try(:short_description) %></p>
+              </div>  
+            </div>  
+          </li>
+        <% end %>
+      </ul>
+      </div>
+  </div>
+</section>
