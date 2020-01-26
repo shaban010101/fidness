@@ -12,23 +12,25 @@ class ProfileForm
   end
 
   def save
-     return false if invalid?
-     
+   return false if invalid?
+   begin 
      ActiveRecord::Base.transaction do
-      current_user.tap do |user|
-        user.first_name = first_name
-        user.last_name = last_name
-        user.avatar.attach(avatar) if avatar
-        user.save
-      end  
-      
-      answers.map { |answer| Answer.create(answer) }
-      built_profile.save
-    end
+       current_user.first_name = first_name
+       current_user.last_name = last_name
+       current_user.avatar.attach(avatar) if avatar
+       current_user.save!
+       
+       answers.map { |answer| Answer.create(answer) }
+       built_profile.save
+     end
+   rescue ActiveRecord::RecordInvalid => exception
+     errors.add(:avatar, exception.message)
+     return false
+   end
   end
   
   def error_messages
-    (errors.full_messages + built_profile.errors.full_messages + @validated_answers)
+    @error_messages ||= (errors.full_messages + built_profile.errors.full_messages + @validated_answers)
   end
   
   private

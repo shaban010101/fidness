@@ -4,6 +4,7 @@ class ProfilesController < ApplicationController
   end
 
   def create
+    @questions = Question.where(user_type: current_user.type)
     @form = ProfileForm.new(current_user, profile_params)
   
     if @form.save
@@ -14,6 +15,7 @@ class ProfilesController < ApplicationController
       end  
     else
       flash[:errors] = @form.error_messages
+      render 'new'
     end
   end
 

@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2020_01_08_201138) do
 
   create_table "options", force: :cascade do |t|
     t.string "name"
-    t.decimal "number_of_sessions", precision: 1, scale: 1
+    t.decimal "number_of_sessions", precision: 8, scale: 2
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -60,10 +60,6 @@ ActiveRecord::Schema.define(version: 2020_01_08_201138) do
     t.string "question"
     t.text "options", default: [], array: true
     t.string "user_type"
-  end
-
-  create_table "schema_info", id: false, force: :cascade do |t|
-    t.integer "version", default: 0, null: false
   end
 
   create_table "users", force: :cascade do |t|

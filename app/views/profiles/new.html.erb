@@ -3,6 +3,7 @@
    <div class="col-sm-5 text-center">
      <h2>Profile</h2>
      <%= form_tag(profile_path, method: :post, multipart: true) do %>
+       <%= render 'layouts/error_messages', object: @form %>
        <div class="form-group">
          <%= text_field_tag(:first_name, nil, placeholder: 'Enter your First name', class: "form-control") %>
 	 <%= text_field_tag(:last_name, nil, placeholder: 'Enter your Last name', class: "form-control") %>

@@ -11,15 +11,14 @@ module SessionHelper
   def session_discount
     {
       '0.5' => 0.60,
-      '1' => 1,
-      '5' => 0.92,
-      '10' => 0.84,
-      '15' => 0.76
+      '10.0' => 1,
+      '5.0' => 0.92,
+      '10.0' => 0.84,
+      '15.0' => 0.76
     }
   end
 
   def sessions_cost(trainer, number_of_sessions, discount_percentage: 0)
-    binding.pry
     (trainer.profile.try(:price) * number_of_sessions) *  discount_percentage
   end
 

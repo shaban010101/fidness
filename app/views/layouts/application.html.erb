@@ -15,6 +15,12 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <% if @trainer && current_page?(trainer_path(@trainer.id)) %>
+      <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
+      <script type="text/javascript">
+        var stripe = Stripe("<%= Rails.application.credentials.config.fetch(:stripe).fetch(:publishable_key) %>");
+      </script>
+    <% end %>
     <!-- <script src="app/assets/javascripts/vendor/modernizr-2.6.2.min.js"></script> -->
     <!--[if lt IE 9]>
       <script src="js/vendor/respond.min.js"></script>

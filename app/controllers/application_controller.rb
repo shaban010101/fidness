@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def after_sign_in_path_for(user)
-     if user.answers.answers
+     if user&.answers&.answers
        if user.trainer?
          redirect_to :trainer_dashboard
        else

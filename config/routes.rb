@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resources :sessions, only: [:new, :create]
   end
   get '/sessions/:id', to: 'sessions#show' 
+  post '/payment_intent', to: 'sessions#intent'
   devise_for :users, :controllers => {:registrations => "registrations"}
   resource :trainer_dashboard, only: [:show]
 end

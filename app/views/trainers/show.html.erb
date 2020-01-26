@@ -46,37 +46,50 @@
                       <h2 class="modal-title" id="myModalLabel">Purchase sessions</h2>
                     </div>
                     <div class="modal-body">
-                        <div class="form-horizontal">
-                          <%= form_tag(trainer_sessions_path(@trainer.id), method: :post) do %>                 <div class="col-sm-8 sessions">
-                              <%= select_options_html(@trainer) %>
-                            </div>
-                            <div class="col-sm-8 sessions">
-                              <%= text_field_tag('address_line_1', nil, placeholder: 'House number and Street Name', class: "form-control") %>
-                            </div>
-                            <div class="col-sm-8 sessions">
-                              <%= text_field_tag('city', nil, placeholder: 'City',  class: "form-control") %>
-                            </div>
-                            <div class="col-sm-8 sessions">
-                               <%= text_field_tag('post_code', nil, placeholder: 'Post code', class: "form-control") %>
-                            </div>
-                            <div class="col-sm-8 sessions">
-                              <%= text_field_tag('card_number', nil, placeholder: "Card number", class: "form-control") %>
-                            </div>
-                            <div class="col-sm-8 sessions">
-                              <%= text_field_tag('cvv', nil, placeholder: 'Card CVC code', class: "form-control") %>
-                            </div>
-                            <div class="col-sm-8 sessions">
-                              <%= month_field_tag('expiry_month_year', nil, min: 1, max: 12, step: 1, class: "form-control") %>
-                            </div>
-                            <div class="col-sm-8 sessions">
-                              <p class="total-price"></p>
-                            </div>
-                            <button type="submit" class="btn btn-default sessions">Purchase</button>
-                        <% end %>
+                      <% if flash['errors'] %>
+                      <div id="error_explanation">
+                        <div class="alert alert-danger alert-dismissable">
+                          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                          <p><strong>This form contains <%= pluralize(flash['errors'].count, 'error') %>.</strong></p>
+                          <ul>
+                            <% flash['errors'].each do |msg| %>
+                            <li><%= msg %></li>
+                            <% end %>
+                          </ul>
+                        </div>
                       </div>
-                    <div class="modal-footer">
-                    </div>
-                  </div>
+                      <% end %>
+                       <div class="form-horizontal">
+                         <form id="payment-form">
+                         <div id="card-errors" role="alert"></div>
+                         <div class="form-row">
+                           <div class="col-sm-8 sessions">
+-                              <%= select_options_html(@trainer) %>
+-                            </div>
+                           <div class="col-sm-8 sessions">
+                             <input id="cardholder-name" name="name" class="form-control" placeholder="Your name on the card" required>
+                           </div>
+                           <div class="col-sm-8 sessions">
+                             <input  id="cardholder-address" name="address" class="form-control" placeholder="Stree name and house number" required>
+                           </div>
+                           <div class="col-sm-8 sessions">
+                             <input  id="cardholder-city" name="city" class="form-control" placeholder="City">
+                           </div>
+                           <div class="col-sm-8 sessions">
+                             <input id="cardholder-state" name="state" class="form-control" placeholder="County">
+                           </div>
+                           <div class="col-sm-8 sessions">
+                             <div class="form-control" id="card-element"></div>
+                           </div>
+                           <div class="col-sm-8 sessions">
+-                            <p class="total-price"></p>
+-                          </div>
+                           <%= hidden_field_tag('trainer_id',  @trainer.id) %>
+                         </div>
+                         <button id="card-button" class="btn btn-default sessions">Submit Payment</button>
+                         </form>
+                      </div>
+                <div class="modal-footer"></div> 
                 </div>
               </div>
             </div>
