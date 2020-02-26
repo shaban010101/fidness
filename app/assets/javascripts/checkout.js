@@ -45,8 +45,21 @@ $(document).ready(function() {
     changePrice()
   });
 
+  function changeLoadingState(isLoading) {
+    if (isLoading) {
+      document.querySelector("button").disabled = true;
+      document.querySelector("#spinner").classList.remove("hidden");
+      document.querySelector("#card-button").classList.add("hidden");
+    } else {
+      document.querySelector("button").disabled = false;
+      document.querySelector("#spinner").classList.add("hidden");
+      document.querySelector("#card-button").classList.remove("hidden");
+    }
+  };
+
   $('#payment-form').submit(function () {
       event.preventDefault();
+      changeLoadingState(true);
       stripe.confirmCardPayment($('input#client_secret').val(), { 
         payment_method: {
         card: card,
@@ -56,19 +69,35 @@ $(document).ready(function() {
       }}
     }).then(function(result) {
     if (result.error) {
-       var displayError = document.getElementById('card-errors');
-       displayError.textContent = result.error.message;
+      changeLoadingState(false);
+      var displayError = document.getElementById('card-errors');
+      displayError.textContent = result.error.message;
     } else {
-      // The payment has been processed!
-      if (result.paymentIntent.status === 'succeeded') {
-        // Show a success message to your customer
-        // There's a risk of the customer closing the window before callback
-        // execution. Set up a webhook or plugin to listen for the
-        // payment_intent.succeeded event that handles any business critical
-        // post-payment actions.
-      }
-    }
+       $.post('/sessions', { user_id: $('input#user_id').val(),
+                             trainer_id: $('input#trainer_id').val(), 
+                             option_id: $('#option').find(':selected')[0].value}).then(function(response) {
+       window.location = '/sessions/' + response.id;                      
+    });
+   }
   });
- });                               
+ });
+
+  function orderComplete(clientSecret) {
+    stripe.retrievePaymentIntent(clientSecret).then(function(result) {
+      var paymentIntent = result.paymentIntent;
+      var paymentIntentJson = JSON.stringify(paymentIntent, null, 2);
+
+      document.querySelector("#payment-form").classList.add("hidden");
+      document.querySelector("pre").textContent = paymentIntentJson.status;
+
+      document.querySelector(".sr-result").classList.remove("hidden");
+      
+      setTimeout(function() {
+        document.querySelector(".sr-result").classList.add("expand");
+      }, 200);
+
+      changeLoadingState(false);
+   });
+  };
 });
 

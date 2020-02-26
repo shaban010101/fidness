@@ -3,9 +3,8 @@ Rails.application.routes.draw do
   root to: "home#index"
   mount API::Base, at: "/"
   resource :profile, only: [:new, :create, :show]
-  resources :trainers, only: [:index, :show] do
-    resources :sessions, only: [:new, :create]
-  end
+  resources :trainers, only: [:index, :show]
+  resources :sessions, only: [:create, :show]
   get '/sessions/:id', to: 'sessions#show' 
   post '/payment_intent', to: 'sessions#intent'
   devise_for :users, :controllers => {:registrations => "registrations"}

@@ -21,11 +21,11 @@
       <div class="col-sm-12">
         <div class="classes media light_section">
           <a href="#" class="pull-left">
-            <%= image_tag('example/trainer-vertical2.jpg', alt: "image01", class: "media-object") %>
+            <%= image_tag(@trainer.avatar, alt: "image01", class: "media-object") if @trainer.avatar.attached? %>
           </a>
 
           <div class="media-body">
-            <h3><a href="class-single.html"><%= (@trainer.first_name + @trainer.last_name) %></a></h3>
+            <h3><a href="class-single.html"><%= "#{@trainer.first_name} #{@trainer.last_name}" %></a></h3>
             <div class="classes-description">
               <p>Stet clita kasd gubergren, no sea takimata sanctus est lorem ipsum dolor sit amet.</p>
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, voluptates, nemo, quaerat culpa sunt
@@ -60,8 +60,15 @@
                       </div>
                       <% end %>
                        <div class="form-horizontal">
+                         
                          <form id="payment-form">
                          <div id="card-errors" role="alert"></div>
+                         <div class="sr-result hidden">
+                           <p>Payment completed<br /></p>
+                           <pre>
+                             <code></code>
+                           </pre>
+                         </div>
                          <div class="form-row">
                            <div class="col-sm-8 sessions">
 -                              <%= select_options_html(@trainer) %>
@@ -86,6 +93,7 @@
 -                          </div>
                            <%= hidden_field_tag('trainer_id',  @trainer.id) %>
                          </div>
+                         <div class="spinner hidden" id="spinner"></div>
                          <button id="card-button" class="btn btn-default sessions">Submit Payment</button>
                          </form>
                       </div>

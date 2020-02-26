@@ -1,20 +1,20 @@
 class SessionsController < ApplicationController
   include SessionHelper
 
-  def new
-    @trainer = Trainer.find(params[:trainer_id])
-  end
-
   def create
-    purchase_form = PurchaseForm.new(current_user, sessions_params)
-    if purchase_form.save
-      render json: { success: true }, status: 201 
+    params.permit(:option_id, :trainer_id)
+    session = Session.create(option_id: params[:option_id], trainer_id: params[:trainer_id], user_id: current_user.id)
+    if session
+      render json: { id: session.id }
     else
-      render json: { errors: purchase_form.errors.full_messages }, status: 422
+      render json: { errors: session.errors.full_error_messages }, status: 422
     end
   end
 
   def show
+    @session = Session.find(params[:id])
+    @trainer = @session.trainer
+    @option = @session.option
   end
 
   def intent
