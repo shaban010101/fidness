@@ -1,9 +1,9 @@
-class SessionsController < ApplicationController
+class TrainingSessionsController < ApplicationController
   include SessionHelper
 
   def create
     params.permit(:option_id, :trainer_id)
-    session = Session.create(option_id: params[:option_id], trainer_id: params[:trainer_id], user_id: current_user.id)
+    session = PurchasedSession.create(option_id: params[:option_id], trainer_id: params[:trainer_id], user_id: current_user.id)
     if session
       render json: { id: session.id }
     else
@@ -22,7 +22,7 @@ class SessionsController < ApplicationController
     trainer = Trainer.find(params[:trainer_id])
     number_of_sessions = Option.find(params[:option_id]).number_of_sessions
     
-    amount = sessions_cost(trainer, number_of_sessions, discount_percentage: session_discount[number_of_sessions.to_s])
+    amount = sessions_cost(trainer, number_of_sessions, discount_percentage: session_discount[number_of_sessions.to_s])ss
 
     intent = Stripe::PaymentIntent.create({
                                    amount: (amount * 100).to_i,

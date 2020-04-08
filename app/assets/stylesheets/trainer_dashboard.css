@@ -1,0 +1,20 @@
+.alert.trainer-dashboard {
+  border-radius: 4px;
+  padding: 15px;
+  border: 1px solid #00000000 transparent;
+  width: 25%;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+.trainer-dashboard {
+  margin-top: 30px;
+  text-align: center; 
+}
+
+.react-datepicker-wrapper {
+  margin-top: 30px;  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

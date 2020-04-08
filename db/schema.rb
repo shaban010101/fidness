@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_21_230905) do
+ActiveRecord::Schema.define(version: 2020_04_07_205444) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,15 @@ ActiveRecord::Schema.define(version: 2020_02_21_230905) do
     t.string "answer"
   end
 
+  create_table "availabilities", force: :cascade do |t|
+    t.datetime "available_at", null: false
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id", "available_at"], name: "index_availabilities_on_user_id_and_available_at", unique: true
+    t.index ["user_id"], name: "index_availabilities_on_user_id"
+  end
+
   create_table "options", force: :cascade do |t|
     t.string "name"
     t.decimal "number_of_sessions", precision: 8, scale: 2
@@ -56,6 +65,21 @@ ActiveRecord::Schema.define(version: 2020_02_21_230905) do
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
+  create_table "purchased_sessions", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "trainer_id", null: false
+    t.bigint "option_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "external_id"
+    t.string "currency"
+    t.decimal "price", precision: 8, scale: 2
+    t.string "payment_status"
+    t.index ["option_id"], name: "index_purchased_sessions_on_option_id"
+    t.index ["trainer_id"], name: "index_purchased_sessions_on_trainer_id"
+    t.index ["user_id"], name: "index_purchased_sessions_on_user_id"
+  end
+
   create_table "questions", force: :cascade do |t|
     t.string "question"
     t.text "options", default: [], array: true
@@ -63,14 +87,11 @@ ActiveRecord::Schema.define(version: 2020_02_21_230905) do
   end
 
   create_table "sessions", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "trainer_id", null: false
-    t.bigint "option_id", null: false
+    t.bigint "purchased_session_id", null: false
+    t.datetime "session_at", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["option_id"], name: "index_sessions_on_option_id"
-    t.index ["trainer_id"], name: "index_sessions_on_trainer_id"
-    t.index ["user_id"], name: "index_sessions_on_user_id"
+    t.index ["purchased_session_id"], name: "index_sessions_on_purchased_session_id"
   end
 
   create_table "users", force: :cascade do |t|

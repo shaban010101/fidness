@@ -3,7 +3,7 @@
     <div class="col-sm-5 text-center">
       <h2>Log in</h2>
      
-      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <%= form_for(resource, as: resource_name, url: user_session_path) do |f| %>
        <%= render 'layouts/error_messages', object: f.object %>
       <div class="form-group">
         <%= f.label :email, class: "col-sm-2 control-label" %><br />

@@ -1,7 +1,34 @@
 <section class="darkgrey_section">
-  <h1>Dashboard</h1>
+  <div class="container">
+    <div class="trainer-dashboard">
+      <h1 class="trainer-dashboard">Dashboard</h1>
 
-  <h2>Up and coming sessions</h2>
-
-  <h2>Availability</h2>
+      <h2 class="trainer-dashboard">Upcoming sessions</h2>
+        <% if !@sessions.empty? %>
+          <ul class="trainer-dashboard">
+            <% @sessions.each do |session| %>
+              <li style="list-style-type: none;">
+                <p> Session date and time: <%= session.session_at.to_formatted_s(:rfc822) %> with <%= session.purchased_session.user.first_name %></p>
+              </li>
+            <% end %>
+          </ul> 
+        <% else %>
+          <p class="trainer-dashboard">No upcoming sessions booked</p>
+        <% end %>
+      <h2 class="trainer-dashboard">Availability</h2>
+      <p>Select times your availble by clicking on them and they save automatically</p>
+      <div class="alert alert-success alert-dismissible trainer-dashboard" role="alert" style="display: none;" id="alert-success">
+        <button type="button" class="close" onclick="$('#alert-success').css('display', 'none')" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Time saved as available</strong>
+      </div>
+      <div class="alert alert-danger alert-dismissable trainer-dashboard" style="display: none;" id="alert-error">
+        <button type="button" class="close" onclick="$('#alert-error').css('display', 'none')" aria-hidden="true">&times;</button>
+        <p><strong>This form contains the following errors:</strong></p>
+        <ul class="errors"></ul>
+      </div>
+      <div class="date-picker">
+        <%= react_component("Calendar", user_id: current_user.id) %>
+      </div>  
+    </div>
+  </div>  
 </section>

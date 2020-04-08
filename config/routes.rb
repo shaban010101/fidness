@@ -4,9 +4,11 @@ Rails.application.routes.draw do
   mount API::Base, at: "/"
   resource :profile, only: [:new, :create, :show]
   resources :trainers, only: [:index, :show]
-  resources :sessions, only: [:create, :show]
-  get '/sessions/:id', to: 'sessions#show' 
+  resources :training_sessions, only: [:create, :show]
+  get '/sessions/:id', to: 'sessions#show'
   post '/payment_intent', to: 'sessions#intent'
   devise_for :users, :controllers => {:registrations => "registrations"}
   resource :trainer_dashboard, only: [:show]
+  resource :webhook, only: [:create]
+  resources :availability, only: [:index, :create]
 end

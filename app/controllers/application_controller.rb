@@ -4,14 +4,14 @@ class ApplicationController < ActionController::Base
   protected
 
   def after_sign_in_path_for(user)
-     if user&.answers&.answers
+     if user&.answers
        if user.trainer?
-         redirect_to :trainer_dashboard
+         redirect_to :trainer_dashboard && return
        else
-         redirect_to :trainers
+         redirect_to :trainers && return
        end
      else
-       redirect_to :new_profile_path
+       redirect_to :new_profile_path && return
      end
   end
 
