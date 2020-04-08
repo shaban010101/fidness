@@ -1,7 +1,6 @@
 import React from 'react';
 import { Component } from "react";
 import DatePicker from "react-datepicker";
-import Button from "./Button"
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -15,7 +14,7 @@ class Calendar extends Component {
   }
   
   componentDidUpdate() {
-    var el = document.getElementsByClassName("react-datepicker__time-list-item  react-datepicker__time-list-item--selected")[0];
+    var el = document.getElementsByClassName("react-datepicker__time-list-item--selected")[0];
 
     if (el != undefined) {
       el.addEventListener('dblclick',  this.handleClick);
@@ -23,7 +22,7 @@ class Calendar extends Component {
   }
 
   componentWillUnmount() {
-    var el = document.getElementsByClassName(".react-datepicker__time-list-item  react-datepicker__time-list-item--selected")[0];
+    var el = document.getElementsByClassName("react-datepicker__time-list-item--selected")[0];
 
     if (el != undefined) {
       el.removeEventListener('dblclick', this.handleClick);
