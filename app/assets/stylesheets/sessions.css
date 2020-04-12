@@ -65,3 +65,19 @@
   -webkit-animation: loading 2s infinite ease;
   animation: loading 2s infinite ease;
 }
+
+#copyright {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.react-datepicker-wrapper {
+  dispaly: flex;
+  justify-content: flex-end;
+}
+
+#purchase-button {
+  display: flex;
+  justify-content: flex-end;
+}

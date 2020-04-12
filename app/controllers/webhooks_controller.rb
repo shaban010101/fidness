@@ -18,15 +18,8 @@ class WebhooksController < ApplicationController
     rescue Stripe::SignatureVerificationError => e
       render status: 400, json: {}
     end
-
-    event_type = event['type']
-    user = User.find_by_email_address(event['email'])
-
-    if event_type == 'charge.succeeded'
-      SessionsPurchasedMailer.with(user: user).purchased_email.deliver_later
-    else
-      
-    end
+    
+    PurchasedSessionWorker.perform_async(event)
 
     render status: 200, json: { status: 'success' }
   end

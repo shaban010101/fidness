@@ -12,6 +12,7 @@ gem 'bootsnap', require: false
 gem 'listen'
 gem 'devise'
 gem 'grape'
+gem 'sidekiq'
 gem 'faker'
 gem 'mini_magick'
 gem 'active_storage_validations'

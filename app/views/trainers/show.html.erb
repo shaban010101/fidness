@@ -13,11 +13,6 @@
 <section class="darkgrey_section">
   <div class="container">
     <div class="row">
-      <div class="col-sm-12 text-center">
-        <h2 class="block-header"><strong>Trainer</strong> Page</h2>
-      </div>
-    </div>
-    <div class="row">
       <div class="col-sm-12">
         <div class="classes media light_section">
           <a href="#" class="pull-left">
@@ -25,14 +20,18 @@
           </a>
 
           <div class="media-body">
-            <h3><a href="class-single.html"><%= "#{@trainer.first_name} #{@trainer.last_name}" %></a></h3>
+            <h3><%= "#{@trainer.first_name} #{@trainer.last_name}" %></h3>
             <div class="classes-description">
-              <p>Stet clita kasd gubergren, no sea takimata sanctus est lorem ipsum dolor sit amet.</p>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, voluptates, nemo, quaerat culpa sunt
-                quibusdam vitae doloremque molestias voluptatum id mollitia quas aliquid eum eius reiciendis aut illo
-                repellendus
-                ipsa.</p> <!-- Button trigger modal -->
-              <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+              <p><%= @trainer.profile.long_description %></p>
+              <div class="calendar">
+                <p>Select a time for your first session with the trainer</p>
+                  <div class="alert alert-danger alert-dismissable" style="display: none" id="error-message">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <p><strong>Please select a time for your first session first</strong></p>
+                  </div>
+                <%= react_component("Calendar", user_id: @trainer.id) %>
+              </div>  
+              <button type="button" id="purchase-button" class="btn btn-primary btn-lg">
                 Purchase sessions
               </button>
 

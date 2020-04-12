@@ -15,16 +15,17 @@ class Calendar extends Component {
   
   componentDidUpdate() {
     var el = document.getElementsByClassName("react-datepicker__time-list-item--selected")[0];
-
-    if (el != undefined) {
+    var url = window.location.pathname.match(/trainers/);
+    if (el != undefined && url == null) {
       el.addEventListener('dblclick',  this.handleClick);
     }
   }
 
   componentWillUnmount() {
     var el = document.getElementsByClassName("react-datepicker__time-list-item--selected")[0];
+    var url = window.location.pathname.match(/trainers/);
 
-    if (el != undefined) {
+    if (el != undefined && url == null) {
       el.removeEventListener('dblclick', this.handleClick);
     }
   }

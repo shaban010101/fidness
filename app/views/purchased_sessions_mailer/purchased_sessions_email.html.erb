@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Thanks for purchasing sessions <%= @purchased_session.user.first_name %></h1>
+    <p>
+      You can see the sessions you've booked here: <%= link_to('purchased sessions', purchased_session_url(@purchased_session)) %>
+    </p>
+    <p>Kind regards, the Fidness team<p/>
+  </body>
+</html>

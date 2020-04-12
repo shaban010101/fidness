@@ -43,10 +43,20 @@ $(document).ready(function() {
     $('.total-price').empty();
     $('input#client_secret').remove();
     var trainerId = $('input#trainer_id').val();
-    var clientSecret = $.post('/payment_intent', 
+    var monthYear = document.getElementsByClassName('react-datepicker__current-month')[0].textContent;
+    var day = document.getElementsByClassName('react-datepicker__day--selected')[0].textContent;
+    var time = document.getElementsByClassName("react-datepicker__time-list-item--selected")[0].textContent;
+    var parsedDate = Date.parse(day + monthYear);
+    var date = new Date(parsedDate);
+    var timeParts = time.split(':');
+    var unixTime = date.setHours(timeParts[0], timeParts[1]);
+    var sessionAt = new Date(unixTime).toISOString();
+
+    var clientSecret = $.post('/payment-intent', 
                          { 
                            trainer_id: trainerId, 
-                           option_id: $('#option').find(':selected')[0].value}).then(function(response) {
+                           option_id: $('#option').find(':selected')[0].value,
+                           session_at: sessionAt}).then(function(response) {
                              
         $("<input />").attr("type", "hidden")
           .attr("name", "client_secret")
@@ -94,13 +104,9 @@ $(document).ready(function() {
       var displayError = document.getElementById('card-errors');
       displayError.textContent = result.error.message;
     } else {
-       $.post('/sessions', { user_id: $('input#user_id').val(),
-                             trainer_id: $('input#trainer_id').val(), 
-                             option_id: $('#option').find(':selected')[0].value}).then(function(response) {
-       window.location = '/training_sessions/' + response.id;                      
-    });
-   }
-  });
+       window.location = '/future-sessions/';        
+    };
+   });
  });
 
   function orderComplete(clientSecret) {
@@ -119,6 +125,20 @@ $(document).ready(function() {
 
       changeLoadingState(false);
    });
+  };
+  
+  var purchaseButton = document.getElementById('purchase-button');
+  purchaseButton.addEventListener('click',  checkTimeSelected);
+
+  function checkTimeSelected(event) {
+    event.preventDefault;
+    
+    var time = document.getElementsByClassName("react-datepicker__time-list-item--selected")[0];
+    if(time != undefined) {
+      $('#myModal').modal('show');
+    } else { 
+      $('#error-message').css('display', 'block');
+    };
   };
 });
 
