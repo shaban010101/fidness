@@ -7,13 +7,12 @@ class AvailabilityController < ApplicationController
     if availability
       head :created
     else
-      binding.pry
       render(json: { errors: availability.errors.full_messages }, status: 422)
     end
   end
 
   def index
-    available_at = Time.zone.parse(params[:available_at])
+    available_at = DateTime.parse(params[:available_at]).to_date
     return render(json: { periods: [] }, status: 200) if available_at.past?
     
     periods = Availability.select(:available_at).where('available_at >= ?', available_at.beginning_of_day)

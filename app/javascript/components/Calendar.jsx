@@ -31,7 +31,7 @@ class Calendar extends Component {
   }
 
   handleChange = date => {
-    var available_at = date.toISOString();
+    var available_at = date.toLocaleDateString();
      $.get('/availability', { available_at: available_at, user_id: this.state.user_id }).then((response) => {
         var availabilities = response.periods.map(function(period) {
           var p = new Date(period);
