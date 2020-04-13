@@ -74,9 +74,7 @@ class Calendar extends Component {
 
   render() {
     const { startDate } = this.state;
-    let button;
     
-
     return ( 
       <div className="calendar"> 
         <DatePicker

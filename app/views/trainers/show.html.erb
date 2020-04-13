@@ -25,11 +25,11 @@
               <p><%= @trainer.profile.long_description %></p>
               <div class="calendar">
                 <p>Select a time for your first session with the trainer</p>
-                  <div class="alert alert-danger alert-dismissable" style="display: none" id="error-message">
+                  <div class="alert alert-dang\er alert-dismissable" style="display: none" id="error-message">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                     <p><strong>Please select a time for your first session first</strong></p>
                   </div>
-                <%= react_component("Calendar", user_id: @trainer.id) %>
+                <%= react_component("ClientCalendar", user_id: @trainer.id) %>
               </div>  
               <button type="button" id="purchase-button" class="btn btn-primary btn-lg">
                 Purchase sessions
