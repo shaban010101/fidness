@@ -12,6 +12,10 @@ class Calendar extends Component {
       user_id: props.user_id
     };
   }
+
+  componentWillMount() {
+    this.handleChange(this.state.startDate);
+  }
   
   componentDidUpdate() {
     var el = document.getElementsByClassName("react-datepicker__time-list-item--selected")[0];
