@@ -81,3 +81,9 @@
   display: flex;
   justify-content: flex-end;
 }
+
+@media only screen and (max-width: 320px) {
+  .classes-description{
+    width: 328px;
+  }
+}
