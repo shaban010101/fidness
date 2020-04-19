@@ -15,11 +15,20 @@ class AvailabilityController < ApplicationController
     available_at = DateTime.parse(params[:available_at]).to_date
     return render(json: { periods: [] }, status: 200) if available_at.past?
     
-    periods = Availability.select(:available_at).where('available_at >= ?', available_at.beginning_of_day)
+    periods = Availability.where('available_at >= ?', available_at.beginning_of_day)
     .where('available_at <= ?', available_at.end_of_day)
     .where(user_id: params[:user_id])
-    formatted_periods = periods.map do |period|
-      period.available_at.iso8601
+    .pluck(:available_at)
+
+    sessions = Session.joins(:purchased_session)
+     .where(purchased_sessions: { trainer_id: params[:user_id]})
+     .where('session_at >= ?', available_at.beginning_of_day)
+     .where('session_at <= ?', available_at.end_of_day)
+     .pluck(:session_at)                  
+    
+    unavailable_times = (periods + sessions).uniq
+    formatted_periods = unavailable_times.map do |period|
+      period.iso8601
     end
     
     render(json: { periods: formatted_periods }, status: 200)

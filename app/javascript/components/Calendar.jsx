@@ -13,7 +13,7 @@ class Calendar extends Component {
     };
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.handleChange(this.state.startDate);
   }
   
@@ -36,17 +36,17 @@ class Calendar extends Component {
 
   handleChange = date => {
     var available_at = date.toLocaleDateString();
-     $.get('/availability', { available_at: available_at, user_id: this.state.user_id }).then((response) => {
-        var availabilities = response.periods.map(function(period) {
-          var p = new Date(period);
-          return p;
-        });
-       
-        this.setState({
-          startDate: date,
-          availabilities: availabilities
-        });
-     });
+    $.get('/availability', { available_at: available_at, user_id: this.state.user_id }).then((response) => {
+      var availabilities = response.periods.map(function(period) {
+        var p = new Date(period);
+        return p;
+      });
+      
+      this.setState({
+        startDate: date,
+        availabilities: availabilities
+      });
+    });
   };
 
   handleClick = (event) => {
@@ -74,7 +74,7 @@ class Calendar extends Component {
 
   render() {
     const { startDate } = this.state;
-    
+      
     return ( 
       <div className="calendar"> 
         <DatePicker
