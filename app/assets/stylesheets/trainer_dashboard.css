@@ -19,8 +19,15 @@
   justify-content: center;
 }
 
-@media screen and (min-height: 1023px) {
-  .darkgrey_section {
+@media screen and (max-height: 1024px) {
+ .darkgrey_section {   
+    margin-top: 25px;
+    margin-bottom: 70px;
+  }
+}
+
+@media screen and (min-height: 1024px) {
+  .darkgrey_section {   
     padding-top: 0px;
     padding-bottom: 0px;
   }
