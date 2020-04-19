@@ -1,7 +1,13 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
+  around_action :set_time_zone
 
   protected
+
+  def set_time_zone(&block)
+    time_zone = current_user.try(:time_zone) || 'UTC'
+    Time.use_zone(time_zone, &block)
+  end
 
   def after_sign_in_path_for(user)
      if user&.answers
