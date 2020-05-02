@@ -1,0 +1,12 @@
+<section class="darkgrey_section">
+  <div class="container">
+    <h1 class="centered-text">Future sessions</h1>
+    <ul class="centered-text">
+      <% @sessions.map do |session| %>
+        <li style="list-style-type: none;">
+          <p>Session on: <%= I18n.l(session.session_at) %> with <%= link_to(session.purchased_session.trainer.first_name, trainer_path(session.purchased_session.trainer)) %> </p></li>
+      <% end %>
+    <ul>
+  </div>
+</section>
+  

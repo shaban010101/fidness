@@ -1,6 +1,6 @@
 class FutureSessionsController < ApplicationController
   def index
-    
+    @sessions = PurchasedSession.future_sessions(current_user.id).flat_map &:sessions
   end
 
   def create
