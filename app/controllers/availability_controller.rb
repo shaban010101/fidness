@@ -19,16 +19,22 @@ class AvailabilityController < ApplicationController
     .where('available_at <= ?', available_at.end_of_day)
     .where(user_id: params[:user_id])
     .pluck(:available_at)
-
+    
     sessions = Session.joins(:purchased_session)
      .where(purchased_sessions: { trainer_id: params[:user_id]})
      .where('session_at >= ?', available_at.beginning_of_day)
      .where('session_at <= ?', available_at.end_of_day)
-     .pluck(:session_at)                  
+     .pluck(:session_at)
     
-    unavailable_times = (periods + sessions).uniq
-    formatted_periods = unavailable_times.map do |period|
-      period.iso8601
+    if current_user.trainer?
+      unavailable_times = (periods + sessions).uniq
+      formatted_periods = unavailable_times.map do |period|
+        period.iso8601
+      end
+    else
+      formatted_periods = periods.reject do |period|
+        sessions.include?(period)
+      end.map(&:iso8601)
     end
     
     render(json: { periods: formatted_periods }, status: 200)
