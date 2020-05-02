@@ -66,6 +66,7 @@ class ClientCalendar extends Calendar {
           selected={this.state.startDate}
           onChange={this.handleChange}
           includeTimes={this.state.availabilities}
+          minDate={this.minimumDate()} 
           />
       </div>
     );

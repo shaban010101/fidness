@@ -20,6 +20,7 @@ class Calendar extends Component {
   componentDidUpdate() {
     var el = document.getElementsByClassName("react-datepicker__time-list-item--selected")[0];
     var url = window.location.pathname.match(/trainers/);
+
     if (el != undefined && url == null) {
       el.addEventListener('dblclick',  this.handleClick);
     }
@@ -76,6 +77,13 @@ class Calendar extends Component {
     });
   };
 
+  minimumDate = () => {
+    var date = new Date;
+    var nextHour = date.getHours() + 1;
+    date.setHours(nextHour, 0, 0);
+    return date;
+  };
+
   render() {
     const { startDate } = this.state;
       
@@ -89,6 +97,7 @@ class Calendar extends Component {
           selected={this.state.startDate}
           onChange={this.handleChange}
           excludeTimes={this.state.availabilities}
+          minDate={this.minimumDate()} 
           />
       </div>
     );
