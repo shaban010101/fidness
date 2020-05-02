@@ -1,21 +1,34 @@
 class FutureSessionsController < ApplicationController
   def index
-
+    
   end
 
   def create
-    params.permit(:option_id, :trainer_id, :session_at)
-    purchased_session = PurchasedSession.new(option_id: params[:option_id], trainer_id: params[:trainer_id], user_id: current_user.id)
+    session_at = Time.zone.parse(future_session_params[:session_at])
+    purchased_session = PurchasedSession.find(future_session_params[:purchased_session_id])
+
+    availability = Availability.where(
+      available_at: session_at, 
+      user_id: future_session_params[:trainer_id]).last
+      
+    render(json: { errors: 'Trainer no longer avaialable' }, status: 422) unless availability
+      
+    session = Session.new(
+      purchased_session_id: purchased_session.id,
+      session_at: session_at)
     
-    begin 
-      ActiveRecord::Base.transaction do
-        purchased_session.save
-        binding.pry
-        Session.create(purchased_session_id: purchased_session.id, session_at: params[:session_at])
-      end
-      render json: { id: purchased_session.id }, status: 200
-    rescue ActiveRecord::Rollback => e
-      render json: { errors: 'Session could not be saved' }, status: 422
+    if session.save
+      render json: { id: session.id }, status: 200
+    else
+      render json: { errors: session.errors.full_messages }, status: 422
     end
   end
+
+  private
+
+  def future_session_params
+    params.permit(:purchased_session_id, :session_at, :trainer_id)
+  end
 end
+
+

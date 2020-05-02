@@ -49,15 +49,19 @@ class Calendar extends Component {
     });
   };
 
-  handleClick = (event) => {
-    var time = event.toElement.textContent;
+  timeSelected = (time) => {
     var monthYear = document.getElementsByClassName('react-datepicker__current-month')[0].textContent;
     var day = document.getElementsByClassName('react-datepicker__day--selected')[0].textContent;
     var parsedDate = Date.parse(day + monthYear);
     var date = new Date(parsedDate);
     var timeParts = time.split(':');
     var unixTime = date.setHours(timeParts[0], timeParts[1]);
-    var available_at = new Date(unixTime).toISOString();
+    return new Date(unixTime).toISOString();
+  };
+
+  handleClick = (event) => {
+    var time = event.toElement.textContent;
+    var available_at = this.timeSelected(time);
 
     $.post('/availability', { available_at: available_at, user_id: this.state.user_id }).done((response) => {
       $("#alert-success").css('display', 'block');

@@ -17,15 +17,8 @@
         <% end %>
       <h2 class="trainer-dashboard">Availability</h2>
       <p>Select times your availble by clicking on them and they save automatically</p>
-      <div class="alert alert-success alert-dismissible trainer-dashboard" role="alert" style="display: none;" id="alert-success">
-        <button type="button" class="close" onclick="$('#alert-success').css('display', 'none')" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <strong>Time saved as available</strong>
-      </div>
-      <div class="alert alert-danger alert-dismissable trainer-dashboard" style="display: none;" id="alert-error">
-        <button type="button" class="close" onclick="$('#alert-error').css('display', 'none')" aria-hidden="true">&times;</button>
-        <p><strong>This form contains the following errors:</strong></p>
-        <ul class="errors"></ul>
-      </div>
+      <%= render 'layouts/success' %>
+      <%= render 'layouts/error' %>
       <div class="date-picker">
         <%= react_component("Calendar", user_id: current_user.id) %>
       </div>  

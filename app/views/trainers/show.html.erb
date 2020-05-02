@@ -28,7 +28,7 @@
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true" id="close-button">&times;</button>
                     <p><strong>Please select a time for your first session first</strong></p>
                   </div>
-                <%= react_component("ClientCalendar", user_id: @trainer.id) %>
+                <%= react_component("ClientCalendar", user_id: @trainer.id, page: 'trainer') %>
               </div>  
               <button type="button" id="purchase-button" class="btn btn-primary btn-lg">
                 Purchase sessions

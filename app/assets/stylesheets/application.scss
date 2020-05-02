@@ -6,3 +6,31 @@
 @import 'profile.css';
 @import 'sessions.css';
 @import 'trainer_dashboard.css';
+@import 'purchased_sessions';
+
+@media screen and (max-height: 1024px) {
+ .darkgrey_section {   
+    margin-top: 25px;
+    margin-bottom: 70px;
+  }
+}
+
+@media screen and (min-height: 1024px) {
+  .darkgrey_section {   
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+}
+
+.alert.trainer-dashboard {
+  border-radius: 4px;
+  padding: 15px;
+  border: 1px solid #00000000 transparent;
+  width: 25%;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+#close-button {
+  right: -10px;  
+}

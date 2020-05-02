@@ -1,7 +1,11 @@
 <section class="darkgrey_section">
   <div class="container">
-    <h1> Purchased sessions</h1>
-    <p>You have purchased <%= @option.number_of_sessions %> sessions with <%= @trainer.first_name %> <%= @trainer.last_name %> with X remaining</p>
+    <h1 class="centered-text"> Purchased sessions</h1>
+    <p class="centered-text">You have purchased <%= @option.number_of_sessions %> sessions with <%= @trainer.first_name %> <%= @trainer.last_name %> with <%= @sessions_remaining %> sessions remaining</p>
   </div>
+  <p class="centered-text"><strong>Select dates and times you would like to book future sessions with the trainer </strong></p>
+  <%= render 'layouts/success' %>
+  <%= render 'layouts/error' %>
+  <%= react_component("ClientCalendar", user_id: current_user.id, purchased_session_id: @purchased_session.id, trainer_id: @purchased_session.trainer_id, page: 'purchased-session') %>
 </section>
 
