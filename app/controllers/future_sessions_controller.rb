@@ -11,11 +11,11 @@ class FutureSessionsController < ApplicationController
       available_at: session_at, 
       user_id: future_session_params[:trainer_id]).last
       
-    render(json: { errors: 'Trainer no longer avaialable' }, status: 422) unless availability
+    render(json: { errors: 'Trainer no longer available' }, status: 422) unless availability
       
     session = Session.new(
       purchased_session_id: purchased_session.id,
-      session_at: session_at)
+      availability_id: availability.id)
     
     if session.save
       render json: { id: session.id }, status: 200

@@ -12,12 +12,14 @@ class PurchasedSessionWorker
         user_id: payment_intent[:metadata][:user_id])
     
       purchased_session.save
-      availability = Availability.exists?(available_at: DateTime.parse(payment_intent[:metadata][:session_at]))
+      session_at = DateTime.parse(payment_intent[:metadata][:session_at])
+      unavailable_times = Availability.joins(:session).where(available_at: session_at)
+      availability = Availability.where(available_at: session_at).where.not(id: unavailable_times).first
 
       if availability
         Session.create(
           purchased_session_id: purchased_session.id, 
-          session_at: payment_intent[:metadata][:session_at]
+          availability_id: availability.id
         )
       end  
  

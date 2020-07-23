@@ -1,5 +1,6 @@
 class Availability < ApplicationRecord
   belongs_to :user
+  has_one :session
 
   validates :available_at, :user_id, presence: true
   validates :available_at, uniqueness: { scope: :user_id }
