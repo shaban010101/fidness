@@ -1,12 +1,38 @@
 <section class="darkgrey_section">
   <div class="container">
+    <% if flash[:success] %>
+      <div class="alert alert-success alert-dismissible" role="alert" id="alert-success">
+        <button type="button" class="close" id="close-button" onclick="$('#alert-success').css('display', 'none')" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Session cancelled</strong>
+      </div>
+    <% end %>
+    <% if flash[:error] %>
+      <div class="alert alert-danger alert-dismissable trainer-dashboard" id="alert-error">
+        <button type="button" class="close" id="close-button" onclick="$('#alert-error').css('display', 'none')" aria-hidden="true">&times;</button>
+        <p><strong>This form contains the following errors:</strong></p>
+        <ul class="errors">
+          <%=  flash[:error].each do |error| %>
+            <p><%= error %></p>
+          <% end %>
+        </ul>
+      </div>
+      <% flash.clear %>
+  <% end %>
     <h1 class="centered-text">Future sessions</h1>
     <ul class="centered-text">
-      <% @sessions.map do |session| %>
-        <li style="list-style-type: none;">
-          <p>Session on: <%= I18n.l(session.session_at) %> with <%= link_to(session.purchased_session.trainer.first_name, trainer_path(session.purchased_session.trainer)) %> </p></li>
+      <% if @sessions.empty? %>
+        <p>No future sessions booked</p>
+      <% else %>
+        <% @sessions.each do |session| %>
+          <li style="list-style-type: none;" class="sessions">
+            <p>Session on: <%= I18n.l(session.availability.available_at) %> with <%= link_to(session.purchased_session.trainer.first_name, trainer_path(session.purchased_session.trainer)) %> </p>
+            <%= link_to({ controller: "future_sessions", action: "destroy", id: session.id },method: 'delete', class: 'cancel-session') do %>
+              <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            <% end %>
+          </li>
+        <% end %>
       <% end %>
-    <ul>
+    </ul>
   </div>
 </section>
   

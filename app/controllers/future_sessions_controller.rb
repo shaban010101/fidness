@@ -24,6 +24,17 @@ class FutureSessionsController < ApplicationController
     end
   end
 
+  def destroy
+    session = Session.find(params[:id])
+    if session.destroy
+      flash[:success] = 'Future session removed'
+      redirect_to future_sessions_path
+    else
+      flash[:error] = session.errors.first
+      redirect_to future_sessions_path
+    end
+  end
+
   private
 
   def future_session_params
