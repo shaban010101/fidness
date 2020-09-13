@@ -12,4 +12,6 @@ Rails.application.routes.draw do
   resource :trainer_dashboard, only: [:show]
   resource :webhook, only: [:create]
   resources :availability, only: [:index, :create]
+  get '/twilio/token', action: :token, controller: 'twilio'
+  resources :rooms, only: [:show]
 end

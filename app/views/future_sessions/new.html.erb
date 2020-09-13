@@ -9,7 +9,7 @@
         <button type="button" class="btn btn-info btn-lg">Purchase 1 session for  <%= one_session_price(@trainer) %></button></li>
       <li class="sessions"><p><b>Purchase a 5 sessions lasting 1 hour each with the trainer for a total cost of <%= five_session_price(@trainer)%></b></p>
       <button type="button" class="btn btn-info btn-lg">Purchase 5 sessions - <%= per_session_cost(@trainer, 5, discount_percentage: 0.92)%>/per session</button></li>
-      <li class="sessions"><p><b>Purchase 10 sessions lasting 1 hour each with the trainer for a total cost of <%= ten_session_price(@trainer)%></b/></p>
+      <li class="sessions"><p><b>Purchase 10 sessions lasting 1 hour each with the trainer for a total cost of <%= ten_session_price(@trainer)%></b></p></li>
       <button type="button" class="btn btn-info btn-lg">Purchase 10 sessions - <%= per_session_cost(@trainer, 10, discount_percentage: 0.84)%>/per session</button></li>
       <li class="sessions"><p><b>Purchase 15 sessions lasting 1 hour each with the trainer for a total cost of <%= fifthteen_session_price(@trainer) %></b></p>
       <button type="button" class="btn btn-info btn-lg">Purchase 15 sessions - <%= per_session_cost(@trainer, 15, discount_percentage: 0.76)%>/per session</button></li>

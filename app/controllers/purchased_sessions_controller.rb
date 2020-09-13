@@ -1,4 +1,5 @@
 class PurchasedSessionsController < ApplicationController
+  # page needs to be authorized for users who've purchased a session
   def show
     @purchased_session = PurchasedSession.find(params[:id])
     @trainer = @purchased_session.trainer

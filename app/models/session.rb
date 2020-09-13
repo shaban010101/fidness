@@ -2,6 +2,8 @@ class Session < ApplicationRecord
   belongs_to :purchased_session
   belongs_to :availability
 
+  delegate :available_at, to: :availability
+
   validates :purchased_session_id, presence: true
   validate :session_date_not_in_past
   validate :validate_enough_sessions_left

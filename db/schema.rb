@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_22_124409) do
+ActiveRecord::Schema.define(version: 2020_07_25_185619) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
   create_table "active_storage_attachments", force: :cascade do |t|
@@ -91,6 +92,7 @@ ActiveRecord::Schema.define(version: 2020_07_22_124409) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "availability_id"
+    t.uuid "room_id"
     t.index ["availability_id"], name: "index_sessions_on_availability_id"
     t.index ["purchased_session_id"], name: "index_sessions_on_purchased_session_id"
   end
