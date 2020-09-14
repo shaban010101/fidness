@@ -216,6 +216,8 @@ GEM
       nokogiri (>= 1.6, < 2.0)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
+    uglifier (4.2.0)
+      execjs (>= 0.3.0, < 3)
     virtus (1.0.5)
       axiom-types (~> 0.1)
       coercible (~> 1.0)
@@ -254,6 +256,7 @@ DEPENDENCIES
   sidekiq
   stripe
   twilio-ruby (~> 5.39.2)
+  uglifier
   webpacker (~> 4.2.2)
 
 BUNDLED WITH

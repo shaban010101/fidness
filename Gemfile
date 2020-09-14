@@ -23,3 +23,5 @@ gem 'stripe'
 gem 'nokogiri', '~> 1.10.4'
 gem 'react-rails'
 gem 'twilio-ruby', '~> 5.39.2'
+gem 'uglifier'
+
