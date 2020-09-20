@@ -25,3 +25,6 @@ gem 'react-rails'
 gem 'twilio-ruby', '~> 5.39.2'
 gem 'uglifier'
 
+group :production, :staging do
+  gem 'rails_12factor'
+end
