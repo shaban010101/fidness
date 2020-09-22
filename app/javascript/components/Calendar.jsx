@@ -1,6 +1,7 @@
 import React from 'react';
 import { Component } from "react";
 import DatePicker from "react-datepicker";
+import $ from 'jquery'
 
 import "react-datepicker/dist/react-datepicker.css";
 
