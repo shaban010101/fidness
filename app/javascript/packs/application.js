@@ -1,5 +1,6 @@
 import "core-js/stable";
 import "regenerator-runtime/runtime";
+import "../../../app/assets/javascripts/application.js";
 import "../css/application.scss";
 
 /* eslint no-console:0 */
