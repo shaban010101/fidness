@@ -14,7 +14,7 @@
 //= require bootstrap/dist/js/bootstrap
 //= require rails-ujs
 //= require activestorage
-//= require jquery-migrate/jquery-migrate.min.js
+//= require jquery-migrate/dist/jquery-migrate.min.js
 //= require ../../vendor/placeholdem.min.js
 //= require ../../vendor/hoverIntent.js
 //= require ../../vendor/superfish.js
