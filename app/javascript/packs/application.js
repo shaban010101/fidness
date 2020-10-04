@@ -2,6 +2,9 @@ import "core-js/stable";
 import "regenerator-runtime/runtime";
 import "../../../app/assets/javascripts/application.js";
 import "../css/application.scss";
+const importAll = (r) => r.keys().map(r)
+importAll(require.context('../images', false, /\.(png|jpe?g|svg)$/));
+importAll(require.context('../fonts', false, /\.(eot|svg|ttf|woff)$/))
 
 /* eslint no-console:0 */
 // This file is automatically compiled by Webpack, along with any other files
