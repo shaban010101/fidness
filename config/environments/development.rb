@@ -65,5 +65,5 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   config.log_level = :debug
   config.hosts << 'localhost'
-  config.hosts << 'e6c1068f.ngrok.io'
+  config.hosts << '30ca8489e15f.ngrok.io'
 end
