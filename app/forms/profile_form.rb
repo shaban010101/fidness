@@ -3,7 +3,7 @@ class ProfileForm
 
   attr_accessor :current_user, :first_name, :last_name, :avatar, :answers, :profile
 
-  validates :first_name, :last_name, :avatar, :answers, :profile, presence: true
+  validates :first_name, :last_name, :answers, :profile, presence: true
   validate :answers_valid?, :avatar_valid?, :profile_valid?
 
   def initialize(current_user, params = {})
