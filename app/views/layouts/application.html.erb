@@ -39,11 +39,11 @@
               <li class="active">
                 <%= link_to('Home', root_path) %>
               </li>
+              <li class="dropdown">
+                <%= link_to('Trainers', trainers_path) %>
+              </li>
               <% if user_signed_in? %>
                 <% if current_user.type == 'Client' %>
-                  <li class="dropdown">
-                    <%= link_to('Trainers', trainers_path) %>
-                  </li>
                   <li class="dropdown">
                     <%= link_to('Future Sessions', :future_sessions) %>
                   </li>
