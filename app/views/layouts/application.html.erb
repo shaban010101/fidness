@@ -39,16 +39,27 @@
               <li class="active">
                 <%= link_to('Home', root_path) %>
               </li>
-              <li class="dropdown">
-                <%= link_to('Trainers', trainers_path) %>
-              </li>
-              <li class="dropdown">
-                <% if user_signed_in? %>
-                  <%= link_to('Sign Out', :destroy_user_session, :method => 'delete') %>
+              <% if user_signed_in? %>
+                <% if current_user.type == 'Client' %>
+                  <li class="dropdown">
+                    <%= link_to('Trainers', trainers_path) %>
+                  </li>
+                  <li class="dropdown">
+                    <%= link_to('Future Sessions', :future_sessions) %>
+                  </li>
                 <% else %>
-                  <%= link_to('Sign In', :new_user_session) %>
+                  <li class="dropdown">
+                    <%= link_to('Trainer Dashboard', :trainer_dashboard) %>
+                  </li>
                 <% end %>
-              </li>                                        
+                <li class="dropdown">
+                  <%= link_to('Sign Out', :destroy_user_session, :method => 'delete') %>
+                </li>
+              <% else %>
+                <li class="dropdown">
+                  <%= link_to('Sign In', :new_user_session) %>
+                </li>
+              <% end %>
             </ul>
           </div>
 
