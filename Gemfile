@@ -25,6 +25,11 @@ gem 'react-rails'
 gem 'twilio-ruby', '~> 5.39.2'
 gem 'uglifier'
 
+group :development, :test do
+  gem 'rspec-rails', '~> 4.0.1'
+  gem 'factory_bot_rails'
+end
+
 group :production, :staging do
   gem 'rails_12factor'
 end
