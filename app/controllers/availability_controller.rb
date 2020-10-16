@@ -1,7 +1,9 @@
 class AvailabilityController < ApplicationController
+  before_action :redirect_if_not_signed_in, only: [:create]
+  before_action :redirect_if_not_trainer, only: [:create]
 
   def create
-    available_at = Time.zone.parse(availability_params[:available_at])
+    available_at = Time.zone.parse(availability_params[:available_at]) ###????
     availability = Availability.create(available_at: availability_params[:available_at], user_id: availability_params[:user_id])
 
     if availability
@@ -12,6 +14,7 @@ class AvailabilityController < ApplicationController
   end
 
   def index
+    ## Authenticate endpoint???
     available_at = DateTime.parse(params[:available_at]).to_date
     return render(json: { periods: [] }, status: 200) if available_at.past?
     

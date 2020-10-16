@@ -9,4 +9,8 @@ FactoryBot.define do
     password { 'Password123!'}
     type { 'Client' }
   end
+
+  trait :trainer  do
+    type { 'Trainer'}
+  end
 end
