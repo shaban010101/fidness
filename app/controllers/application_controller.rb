@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   around_action :set_time_zone
+  rescue_from ActiveRecord::RecordNotFound, with: -> { render_404  }
 
   protected
 
@@ -33,5 +34,15 @@ class ApplicationController < ActionController::Base
     unless current_user.trainer?
       redirect_to trainers_path
     end
+  end
+
+  def redirect_if_user_cannot_access_session(path)
+    unless current_user.id == session.purchased_session.user.id || session.purchased_session.trainer_id == current_user.id
+      redirect_to path.to_sym
+    end
+  end
+
+  def render_404
+    render file: "#{Rails.root}/public/404.html" , status: :not_found
   end
 end
