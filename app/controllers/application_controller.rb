@@ -37,7 +37,7 @@ class ApplicationController < ActionController::Base
   end
 
   def redirect_if_user_cannot_access_session(path)
-    unless current_user.id == session.purchased_session.user.id || session.purchased_session.trainer_id == current_user.id
+    unless current_user.id == _session.purchased_session.user.id || _session.purchased_session.trainer_id == current_user.id
       redirect_to path.to_sym
     end
   end

@@ -72,7 +72,7 @@ RSpec.describe ApplicationController do
         head :ok
       end
 
-      def session
+      def _session
         @session = Session.find(params[:id])
       end
     end

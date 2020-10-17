@@ -45,7 +45,7 @@ class FutureSessionsController < ApplicationController
     params.permit(:purchased_session_id, :session_at, :trainer_id)
   end
 
-  def session
+  def _session
     @session ||= Session.find(params[:id])
   end
 end

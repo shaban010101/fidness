@@ -5,12 +5,12 @@ class RoomsController < ApplicationController
   end
 
   def show
-    @session = session
+    @session = _session
   end
 
   private
 
-  def session
+  def _session
     @session ||= Session.find_by!(room_id: params[:id])
   end
 end
