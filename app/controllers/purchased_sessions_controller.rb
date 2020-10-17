@@ -1,9 +1,22 @@
 class PurchasedSessionsController < ApplicationController
-  # page needs to be authorized for users who've purchased a session
+  before_action :redirect_if_not_signed_in
+  before_action :redirect_if_not_purchased_session_owner
+
   def show
-    @purchased_session = PurchasedSession.find(params[:id])
-    @trainer = @purchased_session.trainer
+    @trainer = purchased_session.trainer
     @option = @purchased_session.option
     @sessions_remaining = @option.number_of_sessions - @purchased_session.sessions.count
+  end
+
+  private
+
+  def redirect_if_not_purchased_session_owner
+    unless purchased_session.user.id == current_user.id
+      render_404
+    end
+  end
+
+  def purchased_session
+    @purchased_session ||= PurchasedSession.find(params[:id])
   end
 end
