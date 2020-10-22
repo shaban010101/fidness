@@ -1,6 +1,6 @@
 class TrainersController < ApplicationController
   def index
-    @trainers = User.where(type: 'Trainer')
+    @trainers = User.where(type: 'Trainer').joins(:profile)
   end
 
   def show
