@@ -1,10 +1,24 @@
-<% flash.each do |key, value| %>
-  <div class="alert alert-<%= key %>">
-    <a href="#" data-dismiss="alert" class="close">×</a>
-    <ul>
-      <li>
-        <%= value %>
-      </li>
-    </ul>
+<% if flash['errors'] %>
+  <div id="error_explanation">
+    <div class="alert alert-danger alert-dismissable">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <p><strong>This form contains <%= pluralize(flash['errors'].count, 'error') %>.</strong></p>
+      <ul>
+        <% flash['errors'].each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
   </div>
+<% else %>
+  <% flash.each do |key, value| %>
+    <div class="alert alert-<%= key %>">
+      <a href="#" data-dismiss="alert" class="close">×</a>
+      <ul>
+        <li>
+          <%= value %>
+        </li>
+      </ul>
+    </div>
+  <% end %>
 <% end %>
