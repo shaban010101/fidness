@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   around_action :set_time_zone
   rescue_from ActiveRecord::RecordNotFound, with: -> { render_404  }
+  rescue_from StandardError, with: -> { render_500 }
 
   protected
 
@@ -44,5 +45,9 @@ class ApplicationController < ActionController::Base
 
   def render_404
     render file: "#{Rails.root}/public/404.html" , status: :not_found
+  end
+
+  def render_500
+    render file: "#{Rails.root}/public/500.html" , status: :internal_server_error
   end
 end
