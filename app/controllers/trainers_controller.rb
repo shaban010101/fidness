@@ -1,6 +1,6 @@
 class TrainersController < ApplicationController
   def index
-    @trainers = Trainer.joins(:profile)
+    @trainers = Trainer.active
   end
 
   def show

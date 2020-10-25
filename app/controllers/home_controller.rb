@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
   def index
-    @trainers = Trainer.joins(:profile).limit(3)
+    @trainers = Trainer.active.limit(3)
   end
 end
