@@ -4,9 +4,9 @@ class AvailabilityController < ApplicationController
 
   def create
     available_at = Time.zone.parse(availability_params[:available_at]) ###????
-    availability = Availability.create(available_at: availability_params[:available_at], user_id: availability_params[:user_id])
-
-    if availability
+    availability = Availability.create(available_at: available_at, user_id: availability_params[:user_id])
+    
+    if availability.persisted?
       head :created
     else
       render(json: { errors: availability.errors.full_messages }, status: 422)
@@ -45,6 +45,6 @@ class AvailabilityController < ApplicationController
   private
 
   def availability_params
-    params.permit(:user_id, :available_at)
+    params.permit(:user_id, :available_at, :authenticity_token)
   end
 end

@@ -64,8 +64,9 @@ class Calendar extends Component {
   handleClick = (event) => {
     var time = event.toElement.textContent;
     var available_at = this.timeSelected(time);
+    var authenticityToken = $("meta[name='csrf-token']").attr("content");
 
-    $.post('/availability', { available_at: available_at, user_id: this.state.user_id }).done((response) => {
+    $.post('/availability', { available_at: available_at, user_id: this.state.user_id, authenticity_token: authenticityToken }).done((response) => {
       $("#alert-success").css('display', 'block');
     }).fail((jqXHR, textStatus, error) => {
       $("#alert-error").css('display', 'block');
