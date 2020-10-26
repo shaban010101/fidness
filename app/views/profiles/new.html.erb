@@ -5,17 +5,17 @@
      <%= form_tag(profile_path, method: :post, multipart: true) do %>
        <%= render 'layouts/messages' %>
        <div class="form-group">
-         <%= text_field_tag(:first_name, nil, placeholder: 'Enter your First name', class: "form-control") %>
-	 <%= text_field_tag(:last_name, nil, placeholder: 'Enter your Last name', class: "form-control") %>
+         <%= text_field_tag(:first_name, @form.first_name, placeholder: 'Enter your First name', class: "form-control") %>
+         <%= text_field_tag(:last_name, @form.last_name, placeholder: 'Enter your Last name', class: "form-control") %>
          <% if current_user.trainer? %>
            <span class="input-group-text" id="inputGroupFileAddon01">
              <%= file_field_tag :avatar, accept: 'image/png,image/gif,image/jpeg' %>
            </span>
-	   <%= text_field_tag("profile[price]", nil, placeholder: 'Enter the amount you would like to charge per session', class: "form-control") %>
+	         <%= text_field_tag("profile[price]", @form.price, placeholder: 'Enter the amount you would like to charge per session', class: "form-control") %>
            <p>Short descripton</p> 
-           <%= text_area_tag("profile[short_description]", nil, class: "form-control") %>      <p>Long description</p>
-           <%= text_area_tag("profile[long_description]", nil, class: "form-control") %>       <p>Qualifications</p>
-           <%= text_area_tag("profile[qualifications]", nil, class: "form-control") %> 
+           <%= text_area_tag("profile[short_description]", @form.short_description, class: "form-control") %>      <p>Long description</p>
+           <%= text_area_tag("profile[long_description]", @form.long_description, class: "form-control") %>       <p>Qualifications</p>
+           <%= text_area_tag("profile[qualifications]", @form.qualifications, class: "form-control") %>
          <% end %>
          <% @questions.each do |question| %>
             <p><%= question.question %></p>

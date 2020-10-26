@@ -3,7 +3,7 @@ class ProfileForm
 
   attr_accessor :current_user, :first_name, :last_name, :avatar, :answers, :profile
 
-  validates :first_name, :last_name, :answers, :profile, presence: true
+  validates :first_name, :last_name, :answers, presence: true
   validate :answers_valid?, :avatar_valid?, :profile_valid?
 
   def initialize(current_user, params = {})
@@ -18,10 +18,12 @@ class ProfileForm
        current_user.first_name = first_name
        current_user.last_name = last_name
        current_user.avatar.attach(avatar) if avatar
+       binding.pry
        current_user.save!
        
-       answers.map { |answer| Answer.create(answer) }
-       built_profile.save
+       Answer.create(answers)
+       built_profile.save unless client?
+       return true
      end
    rescue ActiveRecord::RecordInvalid => exception
      errors.add(:avatar, exception.message)
@@ -30,7 +32,9 @@ class ProfileForm
   end
   
   def error_messages
-    @error_messages ||= (errors.full_messages + built_profile.errors.full_messages + @validated_answers)
+    @error_messages = errors.full_messages
+    @error_messages += built_profile.errors.full_messages unless client?
+    @error_messages += @validated_answers
   end
   
   private
@@ -46,6 +50,7 @@ class ProfileForm
   end
 
   def profile_valid?
+    return true if client?
     built_profile.valid?
   end
 
@@ -59,5 +64,9 @@ class ProfileForm
     else
       true
     end
+  end
+
+  def client?
+    current_user.type == 'Client'
   end
 end  

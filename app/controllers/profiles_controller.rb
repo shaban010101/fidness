@@ -1,6 +1,9 @@
 class ProfilesController < ApplicationController
+  before_action :redirect_if_not_signed_in
+
   def new
     @questions = Question.where(user_type: current_user.type)
+    @form = ProfileForm.new(current_user, profile_params)
   end
 
   def create
