@@ -1,7 +1,8 @@
 class ProfileForm
   include ActiveModel::Model
 
-  attr_accessor :current_user, :first_name, :last_name, :avatar, :answers, :profile
+  attr_accessor :current_user, :first_name, :last_name, :avatar, :answers,
+    :profile, :price, :short_description, :long_description, :qualifications
 
   validates :first_name, :last_name, :answers, presence: true
   validate :answers_valid?, :avatar_valid?, :profile_valid?
@@ -18,7 +19,6 @@ class ProfileForm
        current_user.first_name = first_name
        current_user.last_name = last_name
        current_user.avatar.attach(avatar) if avatar
-       binding.pry
        current_user.save!
        
        Answer.create(answers)
