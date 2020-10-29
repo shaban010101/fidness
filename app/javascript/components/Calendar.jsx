@@ -70,10 +70,10 @@ class Calendar extends Component {
       $("#alert-success").css('display', 'block');
     }).fail((jqXHR, textStatus, error) => {
       $("#alert-error").css('display', 'block');
-      response.errors.forEach(function(error) {
-        var errorsElement = document.getElementsByClassname("errors")[0];
+      jqXHR.responseJSON.errors.forEach(function(error) {
+        var errorsElement = document.getElementsByClassName("errors")[0];
         var listElement = document.createElement("LI");
-        var errorListItem = listElement.appendChild(error);
+        listElement.appendChild(document.createTextNode(error));
         errorsElement.appendChild(listElement);
       });
     });
