@@ -14,7 +14,7 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <% if @trainer && current_page?(trainer_path(@trainer.id)) %>
       <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
       <script type="text/javascript">
@@ -25,6 +25,7 @@
     <!--[if lt IE 9]>
       <script src="js/vendor/respond.min.js"></script>
     <![endif]-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
   </head>
 
   <body>
@@ -66,5 +67,21 @@
         </div></div>
     </header>
     <%= yield %>
+    <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+    <script>
+      window.cookieconsent.initialise({
+        "palette": {
+          "popup": {
+            "background": "#000"
+          },
+          "button": {
+            "background": "#f1d600"
+          }
+        },
+        "content": {
+          "href": "www.fidness.co.uk/cookie-policy"
+        }
+      });
+    </script>
   </body>
 </html>
