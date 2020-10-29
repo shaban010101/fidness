@@ -3,7 +3,6 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-<html>
   <head>
      <meta charset="utf-8">   
      <title>Fidness</title>
@@ -29,13 +28,16 @@
   </head>
 
   <body>
+  <div id="header-sticky-wrapper" class="sticky-wrapper" style="height: 100px;">
     <header id="header">
-      <div class="container"><div class="row">
-        <%= link_to(root_path, class: "navbar-brand") do %>
-          <img class="responsive-logo" src="<%= asset_pack_path('media/images/logo.png') %>">
-        <% end %>
+      <div class="container">
+        <div class="row">
+          <%= link_to(root_path, class: "navbar-brand") do %>
+            <img class="responsive-logo" src="<%= asset_pack_path('media/images/logo.png') %>">
+          <% end %>
 
-          <div class="col-sm-12 mainmenu_wrap"><div class="main-menu-icon visible-xs"><span></span><span></span><span></span></div>
+          <div class="col-sm-12 mainmenu_wrap">
+            <div class="main-menu-icon visible-xs"><span></span><span></span><span></span></div>
             <ul id="mainmenu" class="menu sf-menu responsive-menu superfish">
               <li class="active">
                 <%= link_to('Home', root_path) %>
@@ -63,10 +65,23 @@
               <% end %>
             </ul>
           </div>
-
-        </div></div>
+        </div>
+      </div>
     </header>
+  </div>
     <%= yield %>
+    <section id="copyright" class="light_section">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-2">
+            Copyright - Fidness
+          </div>
+          <div class="col-sm-2">
+            <%= link_to('Terms & Conditions', terms_and_conditions_path) %>
+          </div>
+        </div>
+      </div>
+    </section>
     <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
     <script>
       window.cookieconsent.initialise({

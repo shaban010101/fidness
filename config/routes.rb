@@ -14,4 +14,5 @@ Rails.application.routes.draw do
   resources :availability, only: [:index, :create]
   get '/twilio/token', action: :token, controller: 'twilio'
   resources :rooms, only: [:show]
+  get '/terms-and-conditions', action: :index, controller: 'terms_and_conditions'
 end
