@@ -16,4 +16,5 @@ Rails.application.routes.draw do
   resources :rooms, only: [:show]
   get '/terms-and-conditions', action: :index, controller: 'terms_and_conditions'
   get '/cookie-policy', action: :index, controller: 'cookie_policy'
+  get '/privacy-notice', action: :index, controller: 'privacy_notice'
 end
