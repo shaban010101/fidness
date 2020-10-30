@@ -14,7 +14,6 @@ class AvailabilityController < ApplicationController
   end
 
   def index
-    ## Authenticate endpoint???
     available_at = DateTime.parse(params[:available_at]).to_date
     return render(json: { periods: [] }, status: 200) if available_at.past?
     
@@ -28,7 +27,7 @@ class AvailabilityController < ApplicationController
      .where('available_at <= ?', available_at.end_of_day)
      .pluck(:available_at)
     
-    if current_user.trainer?
+    if current_user.try(:trainer?)
       unavailable_times = (periods + sessions).uniq
       formatted_periods = unavailable_times.map do |period|
         period.iso8601
