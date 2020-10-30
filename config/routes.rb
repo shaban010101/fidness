@@ -18,4 +18,5 @@ Rails.application.routes.draw do
   get '/cookie-policy', action: :index, controller: 'cookie_policy'
   get '/privacy-notice', action: :index, controller: 'privacy_notice'
   get '/disclaimer', action: :index, controller: 'disclaimer'
+  get '/return_policy', action: :index, controller: 'return_policy'
 end
