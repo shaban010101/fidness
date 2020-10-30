@@ -66,12 +66,6 @@
   animation: loading 2s infinite ease;
 }
 
-#copyright {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-}
-
 .calendar-trainer {
   dispaly: flex;
   justify-content: flex-end;
