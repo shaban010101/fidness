@@ -17,4 +17,5 @@ Rails.application.routes.draw do
   get '/terms-and-conditions', action: :index, controller: 'terms_and_conditions'
   get '/cookie-policy', action: :index, controller: 'cookie_policy'
   get '/privacy-notice', action: :index, controller: 'privacy_notice'
+  get '/disclaimer', action: :index, controller: 'disclaimer'
 end
