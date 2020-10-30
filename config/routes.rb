@@ -15,4 +15,5 @@ Rails.application.routes.draw do
   get '/twilio/token', action: :token, controller: 'twilio'
   resources :rooms, only: [:show]
   get '/terms-and-conditions', action: :index, controller: 'terms_and_conditions'
+  get '/cookie-policy', action: :index, controller: 'cookie_policy'
 end
