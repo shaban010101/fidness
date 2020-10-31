@@ -13,6 +13,7 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application.js' %>
     <%= javascript_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <% if @trainer && current_page?(trainer_path(@trainer.id)) %>
       <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
@@ -20,9 +21,8 @@
         var stripe = Stripe("<%= Rails.application.credentials.config.fetch(:stripe).fetch(:publishable_key) %>");
       </script>
     <% end %>
-    <!-- <script src="app/assets/javascripts/vendor/modernizr-2.6.2.min.js"></script> -->
     <!--[if lt IE 9]>
-      <script src="js/vendor/respond.min.js"></script>
+      <script src="app/vendor/respond.min.js"></script>
     <![endif]-->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
   </head>

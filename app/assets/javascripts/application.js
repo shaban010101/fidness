@@ -11,32 +11,9 @@
 // about supported directives.
 //
 //= require jquery/dist/jquery.min.js
-//= require bootstrap/dist/js/bootstrap
 //= require rails-ujs
 //= require activestorage
-//= require jquery-migrate/dist/jquery-migrate.min.js
-//= require placeholdem.min.js
-//= require hoverIntent.js
-//= require superfish.js
-//= require jquery.actual.min.js
-//= require jquerypp.custom.js
-//= require jquery.elastislide.js
-//= require jquery.flexslider-min.js
-//= require jquery.prettyPhoto.js
-//= require jquery.easing.1.3.js
-//= require jquery.ui.totop.js
-//= require jquery.isotope.min.js
-//= require jquery.easypiechart.min.js
-//= require jflickrfeed.min.js
-//= require jquery.sticky.js
-//= require owl.carousel.min.js
-//= require jquery.nicescroll.min.js
-//= require jquery.fractionslider.min.js
-//= require jquery.scrollTo-min.js
-//= require jquery.localscroll-min.js
-//= require jquery.parallax-1.1.3.js
-//= require jquery.bxslider.min.js
-//= require jquery.funnyText.min.js
+//= require modernizr-2.6.2.min.js
 //= require main
 //= require plugins
 //= require checkout
