@@ -2,7 +2,6 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   around_action :set_time_zone
   rescue_from ActiveRecord::RecordNotFound, with: -> { render_404  }
-  rescue_from StandardError, with: -> { render_500 }
 
   protected
 
