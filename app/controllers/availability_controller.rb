@@ -1,5 +1,6 @@
 class AvailabilityController < ApplicationController
   before_action :redirect_if_not_signed_in, only: [:create]
+  before_action :redirect_if_user_has_not_completed_profile, only: [:created]
   before_action :redirect_if_not_trainer, only: [:create]
 
   def create

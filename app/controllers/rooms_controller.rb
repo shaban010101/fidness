@@ -1,5 +1,6 @@
 class RoomsController < ApplicationController
   before_action :redirect_if_not_signed_in
+  before_action :redirect_if_user_has_not_completed_profile
   before_action only: [:show] do
     redirect_if_user_cannot_access_session('root')
   end

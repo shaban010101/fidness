@@ -1,5 +1,6 @@
 class FutureSessionsController < ApplicationController
   before_action :redirect_if_not_signed_in
+  before_action :redirect_if_user_has_not_completed_profile
   before_action only: [:create, :destroy] do
     redirect_if_user_cannot_access_session('future_sessions')
   end

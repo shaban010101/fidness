@@ -15,5 +15,9 @@ class User < ApplicationRecord
 
   def trainer?
     type == 'Trainer'
-  end  
+  end
+
+  def client?
+    type == 'Client'
+  end
 end

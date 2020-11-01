@@ -1,5 +1,6 @@
 class PurchasedSessionsController < ApplicationController
   before_action :redirect_if_not_signed_in
+  before_action :redirect_if_user_has_not_completed_profile
   before_action :redirect_if_not_purchased_session_owner
 
   def show

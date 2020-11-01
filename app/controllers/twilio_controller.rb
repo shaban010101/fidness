@@ -1,5 +1,6 @@
 class TwilioController < ApplicationController
   before_action :redirect_if_not_signed_in
+  before_action :redirect_if_user_has_not_completed_profile
 
   def token
     account_sid = Rails.application.credentials.config.fetch(:twilio).fetch(:account_sid)

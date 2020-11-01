@@ -49,4 +49,31 @@ class ApplicationController < ActionController::Base
   def render_500
     render file: "#{Rails.root}/public/500.html" , status: :internal_server_error
   end
+
+  def redirect_if_user_has_not_completed_profile
+    if current_user && current_user&.client?
+      unless personal_details_completed? && answers?
+        redirect_to_profile_page
+      end
+    else
+      unless personal_details_completed? && answers? && current_user&.profile
+        redirect_to_profile_page
+      end
+    end
+  end
+
+  private
+
+  def personal_details_completed?
+    current_user&.first_name && current_user&.last_name
+  end
+
+  def answers?
+    current_user&.answers&.any?
+  end
+
+  def redirect_to_profile_page
+    flash[:error] = 'Please complete your profile'
+    redirect_to :new_profile
+  end
 end

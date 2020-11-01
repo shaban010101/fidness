@@ -127,4 +127,66 @@ RSpec.describe ApplicationController do
       end
     end
   end
+
+  describe '#redirect_if_user_has_not_completed_profile' do
+    controller do
+      before_action -> { redirect_if_user_has_not_completed_profile }
+
+      def create
+        head :ok
+      end
+    end
+
+    before do
+      @request.env["devise.mapping"] = Devise.mappings[:user]
+      sign_in user
+    end
+
+    context 'when the user is a client' do
+      context 'when the user has added their personal details' do
+        let(:user) { FactoryBot.create(:user, type: 'Client') }
+        let!(:answer) { FactoryBot.create(:answer, user: user) }
+
+        it 'goes to the page they requested' do
+          post(:create)
+          expect(response.status).to eq(200)
+        end
+      end
+
+      context 'when the user has not completed their personal details' do
+        let(:user) { FactoryBot.create(:user, type: 'Client') }
+
+        it 'goes to the profile creation page' do
+          post(:create)
+          expect(response.status).to eq(302)
+          expect(response).to redirect_to(new_profile_path)
+          expect(flash[:error]).to eq('Please complete your profile')
+        end
+      end
+    end
+
+    context 'when the user is a trainer' do
+      context 'when the user has added their personal details and profile' do
+        let(:user) { FactoryBot.create(:user, type: 'Trainer') }
+        let!(:answer) { FactoryBot.create(:answer, user: user) }
+        let!(:profile) { FactoryBot.create(:profile, user: user) }
+
+        it 'goes to the page they requested' do
+          post(:create)
+          expect(response.status).to eq(200)
+        end
+      end
+
+      context 'when the user has not completed their personal details and profile' do
+        let(:user) { FactoryBot.create(:user, type: 'Trainer') }
+
+        it 'goes to the profile creation page' do
+          post(:create)
+          expect(response.status).to eq(302)
+          expect(response).to redirect_to(new_profile_path)
+          expect(flash[:error]).to eq('Please complete your profile')
+        end
+      end
+    end
+  end
 end
