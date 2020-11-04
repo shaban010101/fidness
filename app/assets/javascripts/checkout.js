@@ -1,3 +1,6 @@
+//= require jquery/dist/jquery.min.js
+
+
 $(document).ready(function() {
   var elements = stripe.elements();
   var card = elements.create('card');
@@ -51,12 +54,14 @@ $(document).ready(function() {
     var timeParts = time.split(':');
     var unixTime = date.setHours(timeParts[0], timeParts[1]);
     var sessionAt = new Date(unixTime).toISOString();
+    var authenticityToken = $("meta[name='csrf-token']").attr("content");
 
     var clientSecret = $.post('/payment-intent', 
                          { 
                            trainer_id: trainerId, 
                            option_id: $('#option').find(':selected')[0].value,
-                           session_at: sessionAt}).then(function(response) {
+                           session_at: sessionAt,
+                           authenticity_token: authenticityToken}).then(function(response) {
                              
         $("<input />").attr("type", "hidden")
           .attr("name", "client_secret")
