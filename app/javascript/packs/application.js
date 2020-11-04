@@ -6,7 +6,7 @@ const importAll = (r) => r.keys().map(r)
 importAll(require.context('../images', false, /\.(png|jpe?g|svg)$/));
 importAll(require.context('../fonts', false, /\.(eot|svg|ttf|woff)$/));
 
-const $ = require('jquery');
+const $ = require('jquery/dist/jquery.min.js');
 window.$ = $;
 window.jQuery = $;
 
