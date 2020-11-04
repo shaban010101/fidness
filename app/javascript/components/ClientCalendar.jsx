@@ -27,6 +27,8 @@ class ClientCalendar extends Calendar {
   handleClick = (event) => {
     var time = event.toElement.textContent;
     var session_at = this.timeSelected(time);
+    var authenticityToken = $("meta[name='csrf-token']").attr("content");
+
     var addErrorToList = function(error) {
       var paragraph = document.createElement("P");
       var errorsList = document.getElementsByClassName("errors")[0];
@@ -38,7 +40,7 @@ class ClientCalendar extends Calendar {
       errorsList.appendChild(errorListItem);
     };
 
-    $.post('/future-session', { session_at: session_at, purchased_session_id: this.state.purchased_session_id, trainer_id: this.state.trainer_id }).done((response) => {
+    $.post('/future-session', { session_at: session_at, purchased_session_id: this.state.purchased_session_id, trainer_id: this.state.trainer_id, authenticity_token: authenticityToken }).done((response) => {
       $("#alert-success").css('display', 'block');
     }).fail(function(jqXHR, textStatus, errorThrown) {
       $("#alert-error").css('display', 'block');     

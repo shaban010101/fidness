@@ -1,7 +1,7 @@
 class FutureSessionsController < ApplicationController
   before_action :redirect_if_not_signed_in
   before_action :redirect_if_user_has_not_completed_profile
-  before_action only: [:create, :destroy] do
+  before_action only: [:destroy] do
     redirect_if_user_cannot_access_session('future_sessions')
   end
 
@@ -43,7 +43,7 @@ class FutureSessionsController < ApplicationController
   private
 
   def future_session_params
-    params.permit(:purchased_session_id, :session_at, :trainer_id)
+    params.permit(:purchased_session_id, :session_at, :trainer_id, :authenticity_token)
   end
 
   def _session
