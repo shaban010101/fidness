@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 2020_07_25_185619) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+  enable_extension "uuid-ossp"
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -92,7 +93,7 @@ ActiveRecord::Schema.define(version: 2020_07_25_185619) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "availability_id"
-    t.uuid "room_id"
+    t.uuid "room_id", default: -> { "uuid_generate_v4()" }, null: false
     t.index ["availability_id"], name: "index_sessions_on_availability_id"
     t.index ["purchased_session_id"], name: "index_sessions_on_purchased_session_id"
   end
