@@ -20,7 +20,7 @@ class VideoChat extends Component {
 
   fetchToken = () => {
     let currentComponent = this;
-    const data = fetch('/twilio/token' + '?' + this.state.roomName, {
+    const data = fetch('/twilio/token' + '?' + 'room_id=' + this.state.roomName, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
