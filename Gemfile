@@ -24,13 +24,15 @@ gem 'nokogiri', '~> 1.10.4'
 gem 'react-rails'
 gem 'twilio-ruby', '~> 5.39.2'
 gem 'uglifier'
-gem 'uglifier'
 
-group :development, :test do
+group :test do
   gem 'rspec-rails', '~> 4.0.1'
   gem 'factory_bot_rails'
   gem 'rails-controller-testing'
   gem 'faker'
+  gem 'capybara'
+  gem 'launchy'
+  gem 'database_cleaner-active_record'
 end
 
 group :production, :staging do

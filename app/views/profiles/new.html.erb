@@ -17,14 +17,14 @@
            <%= text_area_tag("profile[long_description]", @form.long_description, class: "form-control") %>       <p>Qualifications</p>
            <%= text_area_tag("profile[qualifications]", @form.qualifications, class: "form-control") %>
          <% end %>
-         <% @questions.each do |question| %>
+         <% @questions.each_with_index do |question, index| %>
             <p><%= question.question %></p>
               <% if question.options.empty? %>
-                <%= text_area_tag("answers[][answer]", nil, class: "form-control") %>
+                <%= text_area_tag("answers[][answer]", nil, class: "form-control", id: "answer-#{index}") %>
                 <%= hidden_field_tag("answers[][question_id]", question.id) %>
                 <%= hidden_field_tag("answers[][user_id]", current_user.id) %>
               <% else %>
-                <%= select_tag("answers[][answer]", options_for_select(question.options), class: "form-control form-control-sm") %>
+                <%= select_tag("answers[][answer]", options_for_select(question.options), class: "form-control form-control-sm", id: "answer-#{index}") %>
                 <%= hidden_field_tag("answers[][question_id]", question.id) %>
                 <%= hidden_field_tag("answers[][user_id]",  current_user.id) %>
               <% end %>
