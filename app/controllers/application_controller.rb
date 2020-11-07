@@ -65,7 +65,7 @@ class ApplicationController < ActionController::Base
   private
 
   def personal_details_completed?
-    current_user&.first_name && current_user&.last_name
+    !current_user&.first_name.nil? && !current_user&.last_name.nil?
   end
 
   def answers?
