@@ -7,5 +7,6 @@ class Trainer < User
     joins(:profile)
       .where.not(first_name: nil)
       .where.not(last_name: nil)
+      .where(profiles: { approved: true })
   end
 end
