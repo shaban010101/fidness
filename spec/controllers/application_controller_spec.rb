@@ -189,4 +189,42 @@ RSpec.describe ApplicationController do
       end
     end
   end
+
+  describe '#redirect if the trainer has not been approved' do
+    let(:user) { FactoryBot.create(:trainer) }
+    let!(:profile) { FactoryBot.create(:profile, user: user, approved: approved) }
+
+    controller do
+      before_action -> { redirect_if_the_trainer_has_not_been_approved }
+
+      def create
+        head :ok
+      end
+    end
+
+    before do
+      @request.env["devise.mapping"] = Devise.mappings[:user]
+      sign_in user
+    end
+
+    context 'when the trainer has been approved' do
+      let(:approved) { true }
+
+      it 'finishes the action they want to perform' do
+        post(:create)
+        expect(response.status).to eq(200)
+      end
+    end
+
+    context 'when the trainer has not been approved' do
+      let(:approved) { false }
+
+      it 'redirects the user to the profile creation page' do
+        post(:create)
+        expect(response.status).to eq(302)
+        expect(response).to redirect_to(new_profile_path)
+        expect(flash[:error]).to eq('Your account is pending approval')
+      end
+    end
+  end
 end
