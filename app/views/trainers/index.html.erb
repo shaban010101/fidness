@@ -14,7 +14,9 @@
                 <%= image_tag(trainer&.avatar, alt: "image01", class: "media-object") if trainer.avatar.attached? %>
               <% end %>
               <div class="media-body">
-                <h3><%= trainer.first_name %></h3>
+                <%= link_to(trainer_path(trainer.id)) do %>
+                  <h3><%= trainer.first_name %></h3>
+                <% end %>
                 <p><%= trainer.profile.try(:short_description) %></p>
               </div>  
             </div>  
