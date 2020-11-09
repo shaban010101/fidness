@@ -53,7 +53,7 @@ RSpec.describe 'Profile creation', type: :feature do
           find("#answer-0").find(:option, 'Yoga').select_option
           find("#answer-1").find(:option, '5+ years').select_option
           click_button 'Submit'
-          expect(page).to have_current_path(trainer_dashboard_path)
+          expect(page).to have_current_path('/profile/new')
         end
       end
 
