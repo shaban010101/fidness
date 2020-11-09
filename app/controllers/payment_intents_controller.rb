@@ -4,12 +4,12 @@ class PaymentIntentsController < ApplicationController
   def intent
     params.permit(:option_id, :trainer_id, :session_at, :authenticity_token)
     trainer = Trainer.find(params[:trainer_id])
-    number_of_sessions = Option.find(params[:option_id]).number_of_sessions
-    
-    amount = sessions_cost(trainer, number_of_sessions, discount_percentage: session_discount[number_of_sessions.to_s])
+    option = Option.find(params[:option_id])
+    binding.pry
+    amount = sessions_cost(trainer, option, discount_percentage: session_discount[option.number_of_sessions.to_s])
 
     intent = Stripe::PaymentIntent.create({
-                                   amount: (amount * 100).to_i,
+                                   amount: amount.to_i,
                                    currency: 'gbp',
                                    metadata: { 
                                      trainer_id: params[:trainer_id],

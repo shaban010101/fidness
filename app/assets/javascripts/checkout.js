@@ -70,7 +70,7 @@ $(document).ready(function() {
           .appendTo("#payment-form");                     
     });
     
-    $('.total-price').append("Total price: £" + price + " / " + sessionPrice + " per session");
+    $('.total-price').append("Total price: " + price + " / " + sessionPrice + " per session");
   }
   
   $('#myModal').on('show.bs.modal', function(e) {

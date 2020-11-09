@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_08_185627) do
+ActiveRecord::Schema.define(version: 2020_11_09_203144) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -63,8 +63,9 @@ ActiveRecord::Schema.define(version: 2020_11_08_185627) do
     t.string "long_description"
     t.string "qualifications"
     t.bigint "user_id"
-    t.decimal "price", precision: 8, scale: 2
     t.boolean "approved", default: false
+    t.integer "price_cents", default: 0, null: false
+    t.string "price_currency", default: "GBP", null: false
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
