@@ -25,6 +25,7 @@ gem 'react-rails'
 gem 'twilio-ruby', '~> 5.39.2'
 gem 'uglifier'
 gem 'money-rails'
+gem 'jquery-rails'
 
 group :test do
   gem 'rspec-rails', '~> 4.0.1'
