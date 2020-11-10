@@ -9,6 +9,7 @@
     "date-fns": "~2.11.0",
     "jquery": "=1.11.0",
     "jquery-migrate": "=1.2.1",
+    "jquery-ujs": "^1.2.2",
     "moment": "~2.9.0",
     "prop-types": "^15.7.2",
     "react": "=16.13.1",

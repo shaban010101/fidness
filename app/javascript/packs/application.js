@@ -2,6 +2,7 @@ import "core-js/stable";
 import "regenerator-runtime/runtime";
 import "../../../app/assets/javascripts/application.js";
 import "../css/application.scss";
+import {} from 'jquery-ujs'
 const importAll = (r) => r.keys().map(r)
 importAll(require.context('../images', false, /\.(png|jpe?g|svg)$/));
 importAll(require.context('../fonts', false, /\.(eot|svg|ttf|woff)$/));
