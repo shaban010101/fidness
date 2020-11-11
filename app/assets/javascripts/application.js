@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery/dist/jquery.min.js
+//= require bootstrap/dist/js/bootstrap
 //= require activestorage
 //= require modernizr-2.6.2.min.js
 //= require main
