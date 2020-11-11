@@ -192,6 +192,8 @@ GEM
       byebug (~> 11.0)
       pry (~> 0.10)
     public_suffix (4.0.6)
+    puma (5.0.4)
+      nio4r (~> 2.0)
     rack (2.0.7)
     rack-accept (0.4.5)
       rack (>= 0.4)
@@ -339,6 +341,7 @@ DEPENDENCIES
   pg
   pry
   pry-byebug
+  puma
   rails (~> 6.0.0)
   rails-controller-testing
   rails_12factor

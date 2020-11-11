@@ -40,4 +40,5 @@ end
 group :production, :staging do
   gem 'rails_12factor'
   gem "aws-sdk-s3", require: false
+  gem 'puma'
 end
