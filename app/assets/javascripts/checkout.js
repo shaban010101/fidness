@@ -141,8 +141,8 @@ $(document).ready(function() {
     var time = document.getElementsByClassName("react-datepicker__time-list-item--selected")[0];
     if(time != undefined) {
       $('#myModal').modal('show');
-    } else { 
-      $('#error-message').css('display', 'block');
+    } else {
+      document.getElementById('error-message').style.display = 'block';
     };
   };
 });
