@@ -35,11 +35,11 @@ class FutureSessionsController < ApplicationController
   end
 
   def destroy
-    if session.destroy
+    if _session.destroy
       flash[:success] = 'Future session removed'
       redirect_to future_sessions_path
     else
-      flash[:error] = session.errors.first
+      flash[:error] = _session.errors.first
       redirect_to future_sessions_path
     end
   end
