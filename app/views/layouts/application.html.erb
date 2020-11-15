@@ -73,30 +73,31 @@
     </header>
   </div>
     <%= yield %>
-    <section id="copyright" class="light_section">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-2">
-            Copyright - Fidness
-          </div>
-          <div class="col-sm-2">
-            <%= link_to('Terms & Conditions', terms_and_conditions_path) %>
-          </div>
-          <div class="col-sm-2">
-            <%= link_to('Cookie policy', cookie_policy_path) %>
-          </div>
-          <div class="col-sm-2">
-            <%= link_to('Privacy notice', privacy_notice_path) %>
-          </div>
-          <div class="col-sm-2">
-            <%= link_to('Disclaimer', disclaimer_path) %>
-          </div>
-          <div class="col-sm-2">
-            <%= link_to('Return policy', return_policy_path) %>
-          </div>
+
+  <div class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-2">
+          Copyright - Fidness
+        </div>
+        <div class="col-sm-2">
+          <%= link_to('Terms & Conditions', terms_and_conditions_path) %>
+        </div>
+        <div class="col-sm-2">
+          <%= link_to('Cookie policy', cookie_policy_path) %>
+        </div>
+        <div class="col-sm-2">
+          <%= link_to('Privacy notice', privacy_notice_path) %>
+        </div>
+        <div class="col-sm-2">
+          <%= link_to('Disclaimer', disclaimer_path) %>
+        </div>
+        <div class="col-sm-2">
+          <%= link_to('Return policy', return_policy_path) %>
         </div>
       </div>
-    </section>
+    </div>
+  </div>
     <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
     <script>
       window.cookieconsent.initialise({
