@@ -85,11 +85,13 @@ $(document).ready(function() {
     if (isLoading) {
       document.querySelector("button").disabled = true;
       document.querySelector("#spinner").classList.remove("hidden");
-      document.querySelector("#card-button").classList.add("hidden");
+      document.querySelector("#card-button").textContent = 'Processing your Payment';
+      document.querySelector("#card-button").disabled = true;
     } else {
       document.querySelector("button").disabled = false;
       document.querySelector("#spinner").classList.add("hidden");
-      document.querySelector("#card-button").classList.remove("hidden");
+      document.querySelector("#card-button").textContent = 'Submit Payment';
+      document.querySelector("#card-button").disabled = false;
     }
   };
 
@@ -142,7 +144,7 @@ $(document).ready(function() {
     if(time != undefined) {
       $('#myModal').modal('show');
     } else {
-      document.getElementById('error-message').style.display = 'block';
+      $('#error-message').css('display', 'block');
     };
   };
 });
