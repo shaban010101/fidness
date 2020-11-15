@@ -3,7 +3,7 @@
     <% if flash[:success] %>
       <div class="alert alert-success alert-dismissible" role="alert" id="alert-success">
         <button type="button" class="close" id="close-button" onclick="$('#alert-success').css('display', 'none')" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <strong>Session cancelled</strong>
+        <strong><%= flash[:success] %></strong>
       </div>
     <% end %>
     <% if flash[:error] %>

@@ -5,7 +5,6 @@ class PaymentIntentsController < ApplicationController
     params.permit(:option_id, :trainer_id, :session_at, :authenticity_token)
     trainer = Trainer.find(params[:trainer_id])
     option = Option.find(params[:option_id])
-    binding.pry
     amount = sessions_cost(trainer, option, discount_percentage: session_discount[option.number_of_sessions.to_s])
 
     intent = Stripe::PaymentIntent.create({

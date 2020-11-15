@@ -7,6 +7,10 @@ class FutureSessionsController < ApplicationController
 
   def index
     @sessions = PurchasedSession.future_sessions(current_user.id).flat_map &:sessions
+    if Rails.application.routes.recognize_path(request.referer)[:controller] == 'trainers' &&
+      Rails.application.routes.recognize_path(request.referer)[:action] == 'show'
+      flash[:success] = 'Sessions purchased, please check your email inbox for confirmation'
+    end
   end
 
   def create
