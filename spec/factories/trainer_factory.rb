@@ -10,5 +10,6 @@ FactoryBot.define do
     time_zone { 'Europe/London' }
     password { 'Password123!'}
     type { 'Trainer'}
+    terms_and_conditions_accepted { true }
   end
 end

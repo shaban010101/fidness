@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
   end
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:username, :type])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:username, :type, :terms_and_conditions_accepted])
   end
 
   def redirect_if_not_signed_in

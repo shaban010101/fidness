@@ -12,6 +12,7 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
   validates :sex, inclusion: %w(Male Female), allow_nil: true
   validates :type, presence: true, inclusion: %w(Trainer Client)
+  validate :terms_and_conditions
 
   def trainer?
     type == 'Trainer'
@@ -19,5 +20,13 @@ class User < ApplicationRecord
 
   def client?
     type == 'Client'
+  end
+
+  private
+
+  def terms_and_conditions
+    unless terms_and_conditions_accepted == true
+      errors.add(:base, 'Terms and conditions must be accepted to sign up')
+    end
   end
 end
