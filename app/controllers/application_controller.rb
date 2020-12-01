@@ -63,6 +63,7 @@ class ApplicationController < ActionController::Base
   end
 
   def redirect_if_the_trainer_has_not_been_approved
+    return if current_user.client?
     unless current_user&.profile && current_user&.profile&.approved
       flash[:error] = 'Your account is pending approval'
       redirect_to :new_profile
