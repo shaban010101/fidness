@@ -65,7 +65,7 @@ class ApplicationController < ActionController::Base
   def redirect_if_the_trainer_has_not_been_approved
     return if current_user.client?
     unless current_user&.profile && current_user&.profile&.approved
-      flash[:error] = 'Your account is pending approval'
+      flash[:error] = 'Your account is pending approval until you can send us documentation of your personal training qualifications and insurance policy to support@fidness.co.uk'
       redirect_to :new_profile
     end
   end

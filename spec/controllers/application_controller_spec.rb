@@ -223,7 +223,7 @@ RSpec.describe ApplicationController do
         post(:create)
         expect(response.status).to eq(302)
         expect(response).to redirect_to(new_profile_path)
-        expect(flash[:error]).to eq('Your account is pending approval')
+        expect(flash[:error]).to include('Your account is pending approval')
       end
     end
   end
