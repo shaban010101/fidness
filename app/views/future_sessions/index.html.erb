@@ -26,6 +26,9 @@
         <% @sessions.each do |session| %>
           <li style="list-style-type: none;" class="sessions">
             <p>Session on: <%= I18n.l(session.availability.available_at) %> with <%= link_to(session.purchased_session.trainer.first_name, trainer_path(session.purchased_session.trainer)) %> </p>
+            <%= link_to(room_path(session.room_id), class: 'cancel-session') do %>
+              <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
+            <% end %>
             <%= link_to({ controller: "future_sessions", action: "destroy", id: session.id },method: 'delete', class: 'cancel-session') do %>
               <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
             <% end %>
