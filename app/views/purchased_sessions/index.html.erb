@@ -1,0 +1,17 @@
+<section class="darkgrey_section">
+  <div class="container">
+    <h1 class="centered-text">Purchased sessions</h1>
+    <ul class="centered-text">
+      <% if @purchased_sessions.empty? %>
+        <p>No purchased sessions</p>
+      <% else %>
+        <% @purchased_sessions.each do |purchased_session| %>
+          <li style="list-style-type: none;" class="sessions">
+            <p>Sessions with <%= link_to(purchased_session.trainer.first_name, purchased_session_path(purchased_session)) %> </p>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+</section>
+

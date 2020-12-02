@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get '/future-sessions', action: :index, controller: 'future_sessions'
   post '/future-session', action: :create, controller: 'future_sessions'
   resources :future_sessions, only: [:destroy]
-  resources :purchased_sessions, only: [:show]
+  resources :purchased_sessions, only: [:index, :show]
   post '/payment-intent', action: :intent, controller: 'payment_intents'
   devise_for :users, :controllers => {:registrations => "registrations"}
   resource :trainer_dashboard, only: [:show]
