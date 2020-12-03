@@ -12,4 +12,12 @@ test:
   database: fidness_test
   pool: 5
   username: postgres
-  password: 
+  password:
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: fidness_production
+  pool: 5
+  username: postgres
+  password:
