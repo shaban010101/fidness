@@ -47,3 +47,9 @@
   height: 60px;
   text-align: center;
 }
+
+@media screen and (min-height: 900px) {
+  .darkgrey_section {
+    min-height: (100% - 15%);
+  }
+}
