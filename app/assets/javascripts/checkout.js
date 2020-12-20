@@ -5,7 +5,6 @@ $(document).ready(function() {
   var elements = stripe.elements();
   var card = elements.create('card');
   var purchaseButton = document.getElementById('purchase-button');
-  purchaseButton.addEventListener('click',  checkTimeSelected);
   var clientSecret = null;
   var spinnerTarget = document.getElementById('myModal');
   var spinnerOptions = {
@@ -38,6 +37,17 @@ $(document).ready(function() {
     } else {
       displayError.textContent = '';
     }
+  });
+
+  purchaseButton.addEventListener('click', function(event) {
+    event.preventDefault;
+
+    var time = document.getElementsByClassName("react-datepicker__time-list-item--selected")[0];
+    if(time != undefined) {
+      $('#myModal').modal('show');
+    } else {
+      $('#error-message').css('display', 'block');
+    };
   });
  
   function changePrice() {
@@ -134,17 +144,6 @@ $(document).ready(function() {
 
       changeLoadingState(false);
    });
-  };
-
-  function checkTimeSelected(event) {
-    event.preventDefault;
-    
-    var time = document.getElementsByClassName("react-datepicker__time-list-item--selected")[0];
-    if(time != undefined) {
-      $('#myModal').modal('show');
-    } else {
-      $('#error-message').css('display', 'block');
-    };
   };
 });
 
