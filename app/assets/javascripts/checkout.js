@@ -5,6 +5,7 @@ $(document).ready(function() {
   var elements = stripe.elements();
   var card = elements.create('card');
   var purchaseButton = document.getElementById('purchase-button');
+  purchaseButton.addEventListener('click',  checkTimeSelected);
   var clientSecret = null;
   var spinnerTarget = document.getElementById('myModal');
   var spinnerOptions = {
@@ -134,8 +135,6 @@ $(document).ready(function() {
       changeLoadingState(false);
    });
   };
-  
-  purchaseButton.addEventListener('click',  checkTimeSelected);
 
   function checkTimeSelected(event) {
     event.preventDefault;
