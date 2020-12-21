@@ -30,7 +30,7 @@
                 </div>
                 <%= react_component("ClientCalendar", user_id: @trainer.id, page: 'trainer') %>
               </div>
-              <button type="button" id="purchase-button" class="btn btn-primary btn-lg">
+              <button type="button" id="purchase-button" class="btn btn-primary btn-lg" onclick="showPaymentModal(stripe)">
                 Purchase sessions
               </button>
 

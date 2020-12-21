@@ -1,10 +1,8 @@
 //= require jquery/dist/jquery.min.js
 
-
-$(document).ready(function() {
+function createElements(stripe) {
   var elements = stripe.elements();
   var card = elements.create("card");
-  var purchaseButton = document.getElementById("purchase-button");
   var clientSecret = null;
   var spinnerTarget = document.getElementById("myModal");
   var spinnerOptions = {
@@ -39,111 +37,120 @@ $(document).ready(function() {
     }
   });
 
-  purchaseButton.addEventListener("click", function(event) {
-    event.preventDefault;
-
-    var time = document.getElementsByClassName("react-datepicker__time-list-item--selected")[0];
-    if(time != undefined) {
-      $("#myModal").modal("show");
-    } else {
-      $("#error-message").css("display", "block");
-    };
-  });
- 
-  function changePrice() {
-    var selected = $("#option").find(":selected");
-    var price = selected.data("price");
-    var sessionPrice = selected.data("session-cost");
-                     
-    $(".total-price").empty();
-    $("input#client_secret").remove();
-    var trainerId = $("input#trainer_id").val();
-    var monthYear = document.getElementsByClassName("react-datepicker__current-month")[0].textContent;
-    var day = document.getElementsByClassName("react-datepicker__day--selected")[0].textContent;
-    var time = document.getElementsByClassName("react-datepicker__time-list-item--selected")[0].textContent;
-    var parsedDate = Date.parse(day + monthYear);
-    var date = new Date(parsedDate);
-    var timeParts = time.split(":");
-    var unixTime = date.setHours(timeParts[0], timeParts[1]);
-    var sessionAt = new Date(unixTime).toISOString();
-    var authenticityToken = $("meta[name='csrf-token']").attr("content");
-
-    var clientSecret = $.post("/payment-intent", 
-                         { 
-                           trainer_id: trainerId, 
-                           option_id: $("#option").find(":selected")[0].value,
-                           session_at: sessionAt,
-                           authenticity_token: authenticityToken}).then(function(response) {
-                             
-        $("<input />").attr("type", "hidden")
-          .attr("name", "client_secret")
-          .attr("value", response.client_secret)
-          .attr("id", "client_secret")                   
-          .appendTo("#payment-form");                     
-    });
-    
-    $(".total-price").append("Total price: " + price + " / " + sessionPrice + " per session");
-  }
-  
-  $("#myModal").on("show.bs.modal", function(e) {
-    changePrice()
-  });
-
-  $("select").change(function() {
-    changePrice()
-  });
-
-  function changeLoadingState(isLoading) {
-    if (isLoading) {
-      document.querySelector("button").disabled = true;
-      document.querySelector("#spinner").classList.remove("hidden");
-      document.querySelector("#card-button").textContent = "Processing your Payment";
-      document.querySelector("#card-button").disabled = true;
-    } else {
-      document.querySelector("button").disabled = false;
-      document.querySelector("#spinner").classList.add("hidden");
-      document.querySelector("#card-button").textContent = "Submit Payment";
-      document.querySelector("#card-button").disabled = false;
-    }
-  };
-
   $("#payment-form").submit(function () {
-      event.preventDefault();
-      changeLoadingState(true);
-      stripe.confirmCardPayment($("input#client_secret").val(), { 
-        payment_method: {
+    event.preventDefault();
+    changeLoadingState(true);
+    stripe.confirmCardPayment($("input#client_secret").val(), {
+      payment_method: {
         card: card,
         billing_details: {
-         name: $("input#cardholder-name").val(),
-         address: $("input#cardholder-address").val()         
-      }}
-    }).then(function(result) {
-    if (result.error) {
-      changeLoadingState(false);
-      var displayError = document.getElementById("card-errors");
-      displayError.textContent = result.error.message;
-    } else {
-       window.location = "/future-sessions/";        
-    };
-   });
- });
+          name: $("input#cardholder-name").val(),
+          address: $("input#cardholder-address").val()
+        }
+      }
+    }).then(function (result) {
+      if (result.error) {
+        changeLoadingState(false);
+        var displayError = document.getElementById("card-errors");
+        displayError.textContent = result.error.message;
+      } else {
+        window.location = "/future-sessions/";
+      }
+      ;
+    });
+  });
 
-  function orderComplete(clientSecret) {
-    stripe.retrievePaymentIntent(clientSecret).then(function(result) {
-      var paymentIntent = result.paymentIntent;
-      var paymentIntentJson = JSON.stringify(paymentIntent, null, 2);
+  $("select").change(function () {
+    changePrice()
+  });
+}
 
-      document.querySelector("#payment-form").classList.add("hidden");
-      document.querySelector("pre").textContent = paymentIntentJson.status;
+function purchaseButton() {
+  return document.getElementById("purchase-button");
+}
 
-      document.querySelector(".sr-result").classList.remove("hidden");
-      
-      setTimeout(function() {
-        document.querySelector(".sr-result").classList.add("expand");
-      }, 200);
+function showPaymentModal(stripe) {
+  event.preventDefault;
 
-      changeLoadingState(false);
-   });
+  var time = document.getElementsByClassName("react-datepicker__time-list-item--selected")[0];
+  if (time != undefined) {
+    $("#myModal").modal("show");
+    changePrice()
+    createElements(stripe)
+  } else {
+    $("#error-message").css("display", "block");
   };
-});
+}
 
+function changePrice() {
+  var selected = $("#option").find(":selected");
+  var price = selected.data("price");
+  var sessionPrice = selected.data("session-cost");
+
+  $(".total-price").empty();
+  $("input#client_secret").remove();
+  var trainerId = $("input#trainer_id").val();
+  var monthYear = document.getElementsByClassName("react-datepicker__current-month")[0].textContent;
+  var day = document.getElementsByClassName("react-datepicker__day--selected")[0].textContent;
+  var time = document.getElementsByClassName("react-datepicker__time-list-item--selected")[0].textContent;
+  var parsedDate = Date.parse(day + monthYear);
+  var date = new Date(parsedDate);
+  var timeParts = time.split(":");
+  var unixTime = date.setHours(timeParts[0], timeParts[1]);
+  var sessionAt = new Date(unixTime).toISOString();
+  var authenticityToken = $("meta[name='csrf-token']").attr("content");
+
+  var clientSecret = $.post("/payment-intent",
+    {
+      trainer_id: trainerId,
+      option_id: $("#option").find(":selected")[0].value,
+      session_at: sessionAt,
+      authenticity_token: authenticityToken
+    }).then(function (response) {
+
+    $("<input />").attr("type", "hidden")
+      .attr("name", "client_secret")
+      .attr("value", response.client_secret)
+      .attr("id", "client_secret")
+      .appendTo("#payment-form");
+  });
+
+  $(".total-price").append("Total price: " + price + " / " + sessionPrice + " per session");
+}
+
+function changeLoadingState(isLoading) {
+  if (isLoading) {
+    document.querySelector("button").disabled = true;
+    document.querySelector("#spinner").classList.remove("hidden");
+    document.querySelector("#card-button").textContent = "Processing your Payment";
+    document.querySelector("#card-button").disabled = true;
+  } else {
+    document.querySelector("button").disabled = false;
+    document.querySelector("#spinner").classList.add("hidden");
+    document.querySelector("#card-button").textContent = "Submit Payment";
+    document.querySelector("#card-button").disabled = false;
+  }
+};
+
+
+function orderComplete(clientSecret) {
+  stripe.retrievePaymentIntent(clientSecret).then(function (result) {
+    var paymentIntent = result.paymentIntent;
+    var paymentIntentJson = JSON.stringify(paymentIntent, null, 2);
+
+    document.querySelector("#payment-form").classList.add("hidden");
+    document.querySelector("pre").textContent = paymentIntentJson.status;
+
+    document.querySelector(".sr-result").classList.remove("hidden");
+
+    setTimeout(function () {
+      document.querySelector(".sr-result").classList.add("expand");
+    }, 200);
+
+    changeLoadingState(false);
+  });
+};
+
+window.payMentModal = (() => {
+  return { purchaseButton };
+})();

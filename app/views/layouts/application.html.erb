@@ -17,8 +17,9 @@
     <%= javascript_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <% if @trainer && current_page?(trainer_path(@trainer.id)) %>
       <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
-      <script type="text/javascript">
+      <script>
         var stripe = Stripe("<%= Rails.application.credentials.config.fetch(:stripe).fetch(:publishable_key) %>");
+        window.payMentModal.purchaseButton();
       </script>
     <% end %>
     <!--[if lt IE 9]>
