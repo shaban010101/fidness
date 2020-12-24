@@ -38,7 +38,9 @@ class Calendar extends Component {
 
   handleChange = date => {
     var available_at = date.toLocaleDateString();
-    $.get('/availability', { available_at: available_at, user_id: this.state.user_id }).then((response) => {
+    var userId = this.state.page == 'purchased-session' ? this.state.trainer_id : this.state.user_id;
+
+    $.get('/availability', { available_at: available_at, user_id: userId }).then((response) => {
       var availabilities = response.periods.map(function(period) {
         var p = new Date(period);
         return p;
