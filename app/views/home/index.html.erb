@@ -6,9 +6,12 @@
           <h2>
             Fidness offers personalised one to one training sessions live on our site or in person in many disciplines with the best trainers to help you achieve your health and fitness goals
           </h2>
-          <p>
-            <a href="#" class="theme_btn">Know More</a>
-          </p>
+
+            <% unless current_user %>
+              <p>
+                <%= link_to('Sign Up', new_user_registration_path, class: 'theme_btn') %>
+              </p>
+            <% end %>
         </div>
       </div>
     </div>
